@@ -46,6 +46,8 @@ public class Dipendente {
     private int stipendio;
 
 
+    public Dipendente() {}
+
     public Dipendente(
         String nome,
         String cognome,

@@ -30,6 +30,7 @@ public class Vendita {
     @Column(name = "prezzoUnitario", nullable = false)
     private int prezzoUnitario;
     
+    public Vendita() {}
     
     public Vendita(
         Long idTransazione,

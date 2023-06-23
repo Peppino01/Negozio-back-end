@@ -35,7 +35,7 @@ public class Transazione {
     @Column(name = "info")
     private String info;
 
-    
+    public Transazione() {}
     
     public Transazione(
         Date data,

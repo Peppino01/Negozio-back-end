@@ -45,6 +45,7 @@ public class Cliente {
     @Column(name = "genere")
     private Genere genere;
     
+    public Cliente() {}
     
     public Cliente(
         String nome,

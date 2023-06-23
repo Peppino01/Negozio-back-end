@@ -35,6 +35,7 @@ public class Recenzione {
     @Column(name = "idCliente", nullable = false)
     private Long idCliente;
     
+    public Recenzione() {}
     
     public Recenzione(
         Date dataPubblicazione,

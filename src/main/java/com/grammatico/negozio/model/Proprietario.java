@@ -42,7 +42,7 @@ public class Proprietario {
     @Column(name = "dataNascita")
     private Date dataNascita;
 
-    
+    public Proprietario() {}
     
     public Proprietario(
         String nome,

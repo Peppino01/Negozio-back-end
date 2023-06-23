@@ -33,6 +33,7 @@ public class Prodotto {
     @Column(name = "stato", nullable = false)
     private String stato;
     
+    public Prodotto() {}
     
     public Prodotto(
         String nome,
