@@ -41,7 +41,9 @@ public class Cliente {
     
     @Column(name = "dataNascita")
     private Date dataNascita;
-
+    
+    @Column(name = "genere")
+    private Genere genere;
     
     
     public Cliente(
@@ -50,7 +52,8 @@ public class Cliente {
         String email,
         String password,
         String numTelefono,
-        Date dataNascita
+        Date dataNascita,
+        Genere genere
     ) {
         super();
         this.nome = nome;
@@ -59,8 +62,15 @@ public class Cliente {
         this.password = password;
         this.numTelefono = numTelefono;
         this.dataNascita = dataNascita;
+        this.genere = genere;
     }
-
+    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNome() {
         return nome;
     }
@@ -79,16 +89,16 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Date getdataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
-    public void setdataNascita(Date dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
-    public String getnumTelefono() {
+    public String getNumTelefono() {
         return numTelefono;
     }
-    public void setnumTelefono(String numTelefono) {
+    public void setNumTelefono(String numTelefono) {
         this.numTelefono = numTelefono;
     }
     public String getPassword() {
@@ -97,11 +107,11 @@ public class Cliente {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Long getId() {
-        return id;
+    public Genere getGenere() {
+        return genere;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setGenere(Genere genere) {
+        this.genere = genere;
     }
 
     @Override
@@ -118,6 +128,5 @@ public class Cliente {
             "}";
                
     }
-    
-    
+
 }
