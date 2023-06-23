@@ -83,16 +83,16 @@ public class Dipendente {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Date getdataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
-    public void setdataNascita(Date dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
-    public String getnumTelefono() {
+    public String getNumTelefono() {
         return numTelefono;
     }
-    public void setnumTelefono(String numTelefono) {
+    public void setNumTelefono(String numTelefono) {
         this.numTelefono = numTelefono;
     }
     public String getPassword() {

@@ -52,41 +52,41 @@ public class Transazione {
         this.info = info;
     }
 
-    public Date getdata() {
-        return data;
-    }
-    public void setdata(Date data) {
-        this.data = data;
-    }
-    public Long getidCliente() {
-        return idCliente;
-    }
-    public void setidCliente(Long idCliente) {
-        this.idCliente = idCliente;
-    }
-    public String gettipo() {
-        return tipo;
-    }
-    public void settipo(String tipo) {
-        this.tipo = tipo;
-    }
-    public String getinfo() {
-        return info;
-    }
-    public void setinfo(String info) {
-        this.info = info;
-    }
-    public int getprezzoTotale() {
-        return prezzoTotale;
-    }
-    public void setprezzoTotale(int prezzoTotale) {
-        this.prezzoTotale = prezzoTotale;
-    }
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public Date getData() {
+        return data;
+    }
+    public void setData(Date data) {
+        this.data = data;
+    }
+    public Long getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    public String getInfo() {
+        return info;
+    }
+    public void setInfo(String info) {
+        this.info = info;
+    }
+    public int getPrezzoTotale() {
+        return prezzoTotale;
+    }
+    public void setPrezzoTotale(int prezzoTotale) {
+        this.prezzoTotale = prezzoTotale;
     }
 
     @Override
