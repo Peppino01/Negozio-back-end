@@ -1,7 +1,11 @@
 package com.grammatico.negozio.model.entity;
 
+import com.grammatico.negozio.model.StatoProdotto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +35,8 @@ public class Prodotto {
     private int quantita;
     
     @Column(name = "stato", nullable = false)
-    private String stato;
+    @Enumerated(EnumType.STRING) // per definire la clonna stato come un enum (definito in StatoProdotto.java)
+    private StatoProdotto stato;
     
     public Prodotto() {}
     
@@ -40,7 +45,7 @@ public class Prodotto {
         int prezzo,
         String descrizione,
         int quantita,
-        String stato
+        StatoProdotto stato
     ) {
         super();
         this.nome = nome;
@@ -74,10 +79,10 @@ public class Prodotto {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    public String getStato() {
+    public StatoProdotto getStato() {
         return stato;
     }
-    public void setStato(String stato) {
+    public void setStato(StatoProdotto stato) {
         this.stato = stato;
     }
     public int getQuantita() {
