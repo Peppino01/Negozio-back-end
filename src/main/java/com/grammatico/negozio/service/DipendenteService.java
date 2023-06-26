@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.grammatico.negozio.DTO.DipendenteDTO;
 import com.grammatico.negozio.DTO.DipendenteDTOMapper;
-import com.grammatico.negozio.model.Dipendente;
+import com.grammatico.negozio.model.entity.Dipendente;
 import com.grammatico.negozio.repository.DipendenteRepository;
 
 @Service

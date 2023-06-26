@@ -3,7 +3,7 @@ package com.grammatico.negozio.service;
 import java.util.List;
 
 import com.grammatico.negozio.DTO.DipendenteDTO;
-import com.grammatico.negozio.model.Dipendente;
+import com.grammatico.negozio.model.entity.Dipendente;
 
 public interface IDipendenteService {
 
