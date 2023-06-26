@@ -1,9 +1,13 @@
-package com.grammatico.negozio.model;
+package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
 
+import com.grammatico.negozio.model.Genere;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,13 +16,13 @@ import jakarta.persistence.UniqueConstraint;
 
 
 @Table(
-    name = "dipendenti",
+    name = "clienti",
     uniqueConstraints = {
-        @UniqueConstraint(name = "dipendente_email_unique", columnNames = "email")
+        @UniqueConstraint(name = "propietario_email_unique", columnNames = "email") // email unique
     }
 )
-@Entity(name = "Dipendente")
-public class Dipendente {
+@Entity(name = "Cliente")
+public class Cliente {
 
     @Id // chiave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // generata automaticamente e di tipo auto increment
@@ -30,32 +34,32 @@ public class Dipendente {
     @Column(name = "cognome")
     private String cognome;
     
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
     
     @Column(name = "password", nullable = false)
     private String password;
     
-    @Column(name = "num_telefono")
+    @Column(name = "numTelefono")
     private String numTelefono;
     
-    @Column(name = "data_nascita")
+    @Column(name = "dataNascita")
     private Date dataNascita;
     
-    @Column(name = "stipendio", nullable = false)
-    private int stipendio;
-
-
-    public Dipendente() {}
-
-    public Dipendente(
+    @Column(name = "genere")
+    @Enumerated(EnumType.STRING) // per definire la clonna genere come un enum (definito in Genere.java)
+    private Genere genere;
+    
+    public Cliente() {}
+    
+    public Cliente(
         String nome,
         String cognome,
         String email,
         String password,
         String numTelefono,
         Date dataNascita,
-        int stipendio
+        Genere genere
     ) {
         super();
         this.nome = nome;
@@ -64,9 +68,15 @@ public class Dipendente {
         this.password = password;
         this.numTelefono = numTelefono;
         this.dataNascita = dataNascita;
-        this.stipendio = stipendio;
+        this.genere = genere;
     }
-
+    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNome() {
         return nome;
     }
@@ -103,17 +113,11 @@ public class Dipendente {
     public void setPassword(String password) {
         this.password = password;
     }
-    public int getStipendio() {
-        return stipendio;
+    public Genere getGenere() {
+        return genere;
     }
-    public void setStipendio(int stipendio) {
-        this.stipendio = stipendio;
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
+    public void setGenere(Genere genere) {
+        this.genere = genere;
     }
 
     @Override
@@ -127,9 +131,8 @@ public class Dipendente {
             ", password=" + password +
             ", numTelefono=" + numTelefono +
             ", dataNascita=" + dataNascita +
-            ", stipendio=" + stipendio +
             "}";
                
     }
-    
+
 }

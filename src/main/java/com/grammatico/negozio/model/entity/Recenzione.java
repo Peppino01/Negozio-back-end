@@ -1,4 +1,4 @@
-package com.grammatico.negozio.model;
+package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
 

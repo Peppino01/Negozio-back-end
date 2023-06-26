@@ -1,4 +1,4 @@
-package com.grammatico.negozio.model;
+package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
 
@@ -12,13 +12,13 @@ import jakarta.persistence.UniqueConstraint;
 
 
 @Table(
-    name = "clienti",
+    name = "proprietari",
     uniqueConstraints = {
         @UniqueConstraint(name = "propietario_email_unique", columnNames = "email") // email unique
     }
 )
-@Entity(name = "Cliente")
-public class Cliente {
+@Entity(name = "Proprietario")
+public class Proprietario {
 
     @Id // chiave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // generata automaticamente e di tipo auto increment
@@ -41,20 +41,16 @@ public class Cliente {
     
     @Column(name = "dataNascita")
     private Date dataNascita;
+
+    public Proprietario() {}
     
-    @Column(name = "genere")
-    private Genere genere;
-    
-    public Cliente() {}
-    
-    public Cliente(
+    public Proprietario(
         String nome,
         String cognome,
         String email,
         String password,
         String numTelefono,
-        Date dataNascita,
-        Genere genere
+        Date dataNascita
     ) {
         super();
         this.nome = nome;
@@ -63,15 +59,8 @@ public class Cliente {
         this.password = password;
         this.numTelefono = numTelefono;
         this.dataNascita = dataNascita;
-        this.genere = genere;
     }
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public String getNome() {
         return nome;
     }
@@ -90,16 +79,16 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Date getDataNascita() {
+    public Date getdataNascita() {
         return dataNascita;
     }
-    public void setDataNascita(Date dataNascita) {
+    public void setdataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
-    public String getNumTelefono() {
+    public String getnumTelefono() {
         return numTelefono;
     }
-    public void setNumTelefono(String numTelefono) {
+    public void setnumTelefono(String numTelefono) {
         this.numTelefono = numTelefono;
     }
     public String getPassword() {
@@ -108,11 +97,11 @@ public class Cliente {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Genere getGenere() {
-        return genere;
+    public Long getId() {
+        return id;
     }
-    public void setGenere(Genere genere) {
-        this.genere = genere;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -129,5 +118,6 @@ public class Cliente {
             "}";
                
     }
-
+    
+    
 }

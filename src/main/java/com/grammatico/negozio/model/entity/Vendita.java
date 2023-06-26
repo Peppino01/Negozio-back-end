@@ -1,4 +1,4 @@
-package com.grammatico.negozio.model;
+package com.grammatico.negozio.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
