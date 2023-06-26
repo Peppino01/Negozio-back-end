@@ -2,6 +2,8 @@ package com.grammatico.negozio.DTO;
 
 import java.sql.Date;
 
+import com.grammatico.negozio.model.Genere;
+
 public record ClienteDTO (
     Long id,
     String nome,
@@ -9,7 +11,8 @@ public record ClienteDTO (
     String email,
     String password,
     String numTelefono,
-    Date dataNascita
+    Date dataNascita,
+    Genere genere
 ) {
     
 }

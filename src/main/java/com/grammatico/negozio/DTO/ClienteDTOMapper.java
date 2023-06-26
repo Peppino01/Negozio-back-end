@@ -18,7 +18,8 @@ public class ClienteDTOMapper implements Function<Cliente, ClienteDTO>{
             cliente.getEmail(),
             cliente.getPassword(),
             cliente.getNumTelefono(),
-            cliente.getDataNascita()
+            cliente.getDataNascita(),
+            cliente.getGenere()
         );
     }
     
