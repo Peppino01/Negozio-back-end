@@ -17,10 +17,10 @@ public class LoginDTOMapper implements Function<Login, LoginDTO> {
         );
     }
 
-    public Login apply(LoginDTO login) { // trasforma un LoginDTO in un Login
+    public Login apply(LoginDTO loginDTO) { // trasforma un LoginDTO in un Login
         return new Login(
-            login.email(),
-            login.password()
+            loginDTO.email(),
+            loginDTO.password()
         );
     }
     

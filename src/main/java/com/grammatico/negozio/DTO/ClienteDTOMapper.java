@@ -22,5 +22,17 @@ public class ClienteDTOMapper implements Function<Cliente, ClienteDTO>{
             cliente.getGenere()
         );
     }
+
+    public Cliente apply(ClienteDTO clienteDTO) {
+        return new Cliente(
+            clienteDTO.nome(),
+            clienteDTO.cognome(),
+            clienteDTO.email(),
+            clienteDTO.password(),
+            clienteDTO.numTelefono(),
+            clienteDTO.dataNascita(),
+            clienteDTO.genere()
+        );
+    }
     
 }

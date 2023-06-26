@@ -70,6 +70,13 @@ public class Cliente {
         this.dataNascita = dataNascita;
         this.genere = genere;
     }
+
+    public boolean isValid() { // ritorna true solo se tutte le condizioni sono verificate
+        return
+            nome != null && !nome.isEmpty() &&
+            email != null && !email.isEmpty() &&
+            password != null && !password.isEmpty();
+    }
     
     public Long getId() {
         return id;
