@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
-import com.grammatico.negozio.model.Dipendente;
+import com.grammatico.negozio.model.entity.Dipendente;
 
 @Service
 public class DipendenteDTOMapper implements Function<Dipendente, DipendenteDTO>{

@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
-import com.grammatico.negozio.model.Cliente;
+import com.grammatico.negozio.model.entity.Cliente;
 
 @Service
 public class ClienteDTOMapper implements Function<Cliente, ClienteDTO>{
