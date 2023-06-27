@@ -32,18 +32,31 @@ public class AuthController {
     }
     
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginRequest) {
+    public ResponseEntity<Object> login(@RequestBody LoginDTO loginRequest) {
         Login login = loginDTOMapper.apply(loginRequest);
+        Cliente cliente;
+        ClienteDTO clienteDTO;
 
         if (!login.isValid()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o password non valide");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email o password non valide");
         }
 
         if (!clienteService.checkClienteCredentials(login.getEmail(), login.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o password errate");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email o password errate");
         }
 
-        return ResponseEntity.ok("Login effettuata con successo");
+        try {
+            cliente = clienteService.getClienteFromEmail(login.getEmail());
+            if(cliente == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore durante la ricerca dell'utente");
+            }
+            clienteDTO = clienteDTOMapper.apply(cliente);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
+        }
+
+        return ResponseEntity.ok(clienteDTO);
     }
 
     @PostMapping("/signin")
@@ -63,10 +76,11 @@ public class AuthController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore durante la creazione dell'utente");
             }
         } catch (Exception e) {
-            System.out.println("Errore durante la creazione di un nuovo utente\n" + e);
+            System.out.println("Errore sconosciuto\n" + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
         }
         
-        return ResponseEntity.status(HttpStatus.CREATED).body("Registrazione avvenuta con successo");
+        return ResponseEntity.ok("");
     }
 
 }

@@ -34,5 +34,9 @@ public class ClienteService implements IClienteService{
     public Cliente insertCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
+
+    public Cliente getClienteFromEmail(String email) {
+        return clienteRepository.findByEmail(email);
+    }
     
 }
