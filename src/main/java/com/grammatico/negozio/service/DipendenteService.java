@@ -25,13 +25,20 @@ public class DipendenteService implements IDipendenteService{
     }
 
     @Override
-    public void insertDipendente(Dipendente nuovoDipendente) {
-        dipendenteRepository.save(nuovoDipendente);
+    public Dipendente insertDipendente(Dipendente nuovoDipendente) {
+        return dipendenteRepository.save(nuovoDipendente);
     }
 
     @Override
     public List<DipendenteDTO> getAllDipendenti() {
         return dipendenteRepository.findAll().stream().map(dipendenteDTOMapper).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean checkExistsByEmail(String email) {
+        Dipendente dipendente = dipendenteRepository.findByEmail(email);
+
+        return dipendente != null;
     }
     
 }

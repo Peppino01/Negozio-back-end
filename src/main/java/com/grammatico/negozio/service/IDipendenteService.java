@@ -7,8 +7,10 @@ import com.grammatico.negozio.model.entity.Dipendente;
 
 public interface IDipendenteService {
 
-    public void insertDipendente(Dipendente nuovoDipendente);
+    public Dipendente insertDipendente(Dipendente nuovoDipendente);
 
     public List<DipendenteDTO> getAllDipendenti();
+
+    public boolean checkExistsByEmail(String email);
     
 }

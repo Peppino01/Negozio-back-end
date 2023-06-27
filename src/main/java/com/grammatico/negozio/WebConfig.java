@@ -25,6 +25,10 @@ public class WebConfig {
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
                 
+                registry.addMapping("/admin/*")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+                
             }
         };
     }

@@ -14,6 +14,7 @@ public class ClienteService implements IClienteService{
         this.clienteRepository = clienteRepository;
     }
 
+    @Override
     public boolean checkClienteCredentials(String email, String password) {
         Cliente cliente = clienteRepository.findByEmail(email);
         if (cliente == null) {
@@ -25,16 +26,19 @@ public class ClienteService implements IClienteService{
         return cliente.getPassword().equals(password);
     }
 
+    @Override
     public boolean checkExistsByEmail(String email) {
         Cliente cliente = clienteRepository.findByEmail(email);
 
         return cliente != null;
     }
 
+    @Override
     public Cliente insertCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
+    @Override
     public Cliente getClienteFromEmail(String email) {
         return clienteRepository.findByEmail(email);
     }

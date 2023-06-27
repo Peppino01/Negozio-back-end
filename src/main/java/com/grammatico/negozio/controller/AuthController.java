@@ -12,19 +12,19 @@ import com.grammatico.negozio.DTO.LoginDTO;
 import com.grammatico.negozio.DTO.LoginDTOMapper;
 import com.grammatico.negozio.model.Login;
 import com.grammatico.negozio.model.entity.Cliente;
-import com.grammatico.negozio.service.ClienteService;
+import com.grammatico.negozio.service.IClienteService;
 
 @RestController
 public class AuthController {
 
     private final LoginDTOMapper loginDTOMapper;
     private final ClienteDTOMapper clienteDTOMapper;
-    private final ClienteService clienteService;
+    private final IClienteService clienteService;
 
     public AuthController(
         LoginDTOMapper loginDTOMapper,
         ClienteDTOMapper clienteDTOMapper,
-        ClienteService clienteService
+        IClienteService clienteService
         ) {
         this.loginDTOMapper = loginDTOMapper;
         this.clienteDTOMapper = clienteDTOMapper;

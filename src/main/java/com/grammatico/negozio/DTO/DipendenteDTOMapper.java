@@ -22,5 +22,17 @@ public class DipendenteDTOMapper implements Function<Dipendente, DipendenteDTO>{
             dipendente.getStipendio()
         );
     }
+
+    public Dipendente apply(DipendenteDTO dipendenteDTO) {
+        return new Dipendente(
+            dipendenteDTO.nome(),
+            dipendenteDTO.cognome(),
+            dipendenteDTO.email(),
+            dipendenteDTO.password(),
+            dipendenteDTO.numTelefono(),
+            dipendenteDTO.dataNascita(),
+            dipendenteDTO.stipendio()
+        );
+    }
     
 }

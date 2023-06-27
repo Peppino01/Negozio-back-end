@@ -67,6 +67,14 @@ public class Dipendente {
         this.stipendio = stipendio;
     }
 
+    public boolean isValid() { // ritorna true solo se tutte le condizioni sono verificate
+        return
+            nome != null && !nome.isEmpty() &&
+            email != null && !email.isEmpty() &&
+            password != null && !password.isEmpty() &&
+            stipendio >= 0;
+    }
+
     public String getNome() {
         return nome;
     }
