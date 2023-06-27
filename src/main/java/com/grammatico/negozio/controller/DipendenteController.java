@@ -1,7 +1,11 @@
 package com.grammatico.negozio.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,11 +51,25 @@ public class DipendenteController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore durante la creazione del dipendente");
             }
         } catch (Exception e) {
-            System.out.println("Errore sconosciuto\n" + e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
         }
         
         return ResponseEntity.ok("");
+    }
+
+    @GetMapping("/allDipendenti")
+    public ResponseEntity<List<DipendenteDTO>> getAllDipendenti() {
+        List<DipendenteDTO> dipendnti = new ArrayList<>();
+
+        // eseguo la ricerca nel db di tutti i dipendenti
+        try {
+            dipendnti = this.dipendenteService.getAllDipendenti();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        System.out.println(dipendnti);
+        return ResponseEntity.ok(dipendnti);
     }
     
 }
