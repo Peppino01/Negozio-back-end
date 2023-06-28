@@ -13,19 +13,19 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 
-                registry.addMapping("/*")
+                registry.addMapping("/**")
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST");
 
-                registry.addMapping("/cliente/*")
+                registry.addMapping("/cliente/**")
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST");
 
-                registry.addMapping("/dipendente/*")
+                registry.addMapping("/dipendente/**")
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
                 
-                registry.addMapping("/admin/*")
+                registry.addMapping("/admin/**")
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
                 

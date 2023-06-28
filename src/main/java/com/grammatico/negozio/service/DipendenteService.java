@@ -38,12 +38,12 @@ public class DipendenteService implements IDipendenteService {
     }
 
     @Override
-    public Dipendente insertDipendente(Dipendente nuovoDipendente) {
+    public Dipendente insert(Dipendente nuovoDipendente) {
         return dipendenteRepository.save(nuovoDipendente);
     }
 
     @Override
-    public List<DipendenteOutputDTO> getAllDipendenti() {
+    public List<DipendenteOutputDTO> getAll() {
         return dipendenteRepository.findAll().stream().map(dipendenteOutputDTOMapper).collect(Collectors.toList());
     }
 

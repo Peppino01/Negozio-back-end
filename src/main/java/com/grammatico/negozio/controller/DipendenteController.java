@@ -18,7 +18,7 @@ import com.grammatico.negozio.model.entity.Dipendente;
 import com.grammatico.negozio.service.DipendenteService;
 
 @RestController
-@RequestMapping("admin")
+@RequestMapping("dipendenti")
 public class DipendenteController {
 
     DipendenteService dipendenteService;
@@ -32,7 +32,7 @@ public class DipendenteController {
         this.dipendenteInputDTOMapper = dipendenteInputDTOMapper;
     }
 
-    @PostMapping("/createDipendente")
+    @PostMapping("/create")
     public ResponseEntity<String> createDipendente(@RequestBody DipendenteInputDTO dipendenteInputDTO) {
         // mappo dipendenteInputDTO in un oggetto di tipo Dipendente
         Dipendente dipendente = dipendenteInputDTOMapper.apply(dipendenteInputDTO);
@@ -49,7 +49,7 @@ public class DipendenteController {
 
         // effettuo l'inserimento del nuovo dipendente
         try {
-            if(!dipendenteService.insertDipendente(dipendente).isValid()) {
+            if(!dipendenteService.insert(dipendente).isValid()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore durante la creazione del dipendente");
             }
         } catch (Exception e) {
@@ -59,13 +59,13 @@ public class DipendenteController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/allDipendenti")
+    @GetMapping("/getAll")
     public ResponseEntity<List<DipendenteOutputDTO>> getAllDipendenti() {
         List<DipendenteOutputDTO> dipendnti = new ArrayList<>();
 
         // eseguo la ricerca nel db di tutti i dipendenti
         try {
-            dipendnti = this.dipendenteService.getAllDipendenti();
+            dipendnti = this.dipendenteService.getAll();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

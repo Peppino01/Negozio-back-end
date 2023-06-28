@@ -9,9 +9,9 @@ public interface IDipendenteService {
 
     public boolean checkCredentials(String email, String password);
 
-    public Dipendente insertDipendente(Dipendente nuovoDipendente);
+    public Dipendente insert(Dipendente nuovoDipendente);
 
-    public List<DipendenteOutputDTO> getAllDipendenti();
+    public List<DipendenteOutputDTO> getAll();
 
     public boolean checkExistsByEmail(String email);
     
