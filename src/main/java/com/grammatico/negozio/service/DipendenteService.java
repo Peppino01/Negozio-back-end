@@ -5,23 +5,36 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.grammatico.negozio.DTO.DipendenteDTO;
-import com.grammatico.negozio.DTO.DipendenteDTOMapper;
+import com.grammatico.negozio.DTO.outputDTO.DipendenteOutputDTO;
+import com.grammatico.negozio.DTO.outputDTO.mapper.DipendenteOutputDTOMapper;
 import com.grammatico.negozio.model.entity.Dipendente;
 import com.grammatico.negozio.repository.DipendenteRepository;
+import com.grammatico.negozio.service.interfaces.IDipendenteService;
 
 @Service
-public class DipendenteService implements IDipendenteService{
+public class DipendenteService implements IDipendenteService {
 
     private final DipendenteRepository dipendenteRepository;
-    private final DipendenteDTOMapper dipendenteDTOMapper;
+    private final DipendenteOutputDTOMapper dipendenteOutputDTOMapper;
 
     public DipendenteService(
         DipendenteRepository dipendenteRepository,
-        DipendenteDTOMapper dipendenteDTOMapper
+        DipendenteOutputDTOMapper dipendenteOutputDTOMapper
     ) {
         this.dipendenteRepository = dipendenteRepository;
-        this.dipendenteDTOMapper = dipendenteDTOMapper;
+        this.dipendenteOutputDTOMapper = dipendenteOutputDTOMapper;
+    }
+
+    @Override
+    public boolean checkCredentials(String email, String password) {
+        Dipendente dipendente = dipendenteRepository.findByEmail(email);
+        if (dipendente == null) {
+            System.out.println("Dipendente non trovato");
+            return false; // Dipendente non trovato
+        }
+
+        // Confronta la password fornita con quella salvata nel dipendente
+        return dipendente.getPassword().equals(password);
     }
 
     @Override
@@ -30,8 +43,8 @@ public class DipendenteService implements IDipendenteService{
     }
 
     @Override
-    public List<DipendenteDTO> getAllDipendenti() {
-        return dipendenteRepository.findAll().stream().map(dipendenteDTOMapper).collect(Collectors.toList());
+    public List<DipendenteOutputDTO> getAllDipendenti() {
+        return dipendenteRepository.findAll().stream().map(dipendenteOutputDTOMapper).collect(Collectors.toList());
     }
 
     @Override

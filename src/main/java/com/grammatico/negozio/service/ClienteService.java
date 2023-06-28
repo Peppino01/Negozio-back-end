@@ -4,9 +4,10 @@ import org.springframework.stereotype.Service;
 
 import com.grammatico.negozio.model.entity.Cliente;
 import com.grammatico.negozio.repository.ClienteRepository;
+import com.grammatico.negozio.service.interfaces.IClienteService;
 
 @Service
-public class ClienteService implements IClienteService{
+public class ClienteService implements IClienteService {
 
     private final ClienteRepository clienteRepository;
 
@@ -15,7 +16,7 @@ public class ClienteService implements IClienteService{
     }
 
     @Override
-    public boolean checkClienteCredentials(String email, String password) {
+    public boolean checkCredentials(String email, String password) {
         Cliente cliente = clienteRepository.findByEmail(email);
         if (cliente == null) {
             System.out.println("Cliente non trovato");

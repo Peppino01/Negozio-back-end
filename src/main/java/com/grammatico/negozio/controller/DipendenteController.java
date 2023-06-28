@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grammatico.negozio.DTO.DipendenteDTO;
-import com.grammatico.negozio.DTO.DipendenteDTOMapper;
+import com.grammatico.negozio.DTO.inputDTO.DipendenteInputDTO;
+import com.grammatico.negozio.DTO.inputDTO.mapper.DipendenteInputDTOMapper;
+import com.grammatico.negozio.DTO.outputDTO.DipendenteOutputDTO;
 import com.grammatico.negozio.model.entity.Dipendente;
 import com.grammatico.negozio.service.DipendenteService;
 
@@ -21,19 +22,20 @@ import com.grammatico.negozio.service.DipendenteService;
 public class DipendenteController {
 
     DipendenteService dipendenteService;
-    DipendenteDTOMapper dipendenteDTOMapper;
+    DipendenteInputDTOMapper dipendenteInputDTOMapper;
 
     public DipendenteController(
         DipendenteService dipendenteService,
-        DipendenteDTOMapper dipendenteDTOMapper
+        DipendenteInputDTOMapper dipendenteInputDTOMapper
     ) {
         this.dipendenteService = dipendenteService;
-        this.dipendenteDTOMapper = dipendenteDTOMapper;
+        this.dipendenteInputDTOMapper = dipendenteInputDTOMapper;
     }
 
     @PostMapping("/createDipendente")
-    public ResponseEntity<String> createDipendente(@RequestBody DipendenteDTO dipendenteDTO) {
-        Dipendente dipendente = dipendenteDTOMapper.apply(dipendenteDTO);
+    public ResponseEntity<String> createDipendente(@RequestBody DipendenteInputDTO dipendenteInputDTO) {
+        // mappo dipendenteInputDTO in un oggetto di tipo Dipendente
+        Dipendente dipendente = dipendenteInputDTOMapper.apply(dipendenteInputDTO);
 
         // verifico la validità dei dati del dipendente
         if (!dipendente.isValid()) {
@@ -54,12 +56,12 @@ public class DipendenteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
         }
         
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/allDipendenti")
-    public ResponseEntity<List<DipendenteDTO>> getAllDipendenti() {
-        List<DipendenteDTO> dipendnti = new ArrayList<>();
+    public ResponseEntity<List<DipendenteOutputDTO>> getAllDipendenti() {
+        List<DipendenteOutputDTO> dipendnti = new ArrayList<>();
 
         // eseguo la ricerca nel db di tutti i dipendenti
         try {
@@ -68,7 +70,6 @@ public class DipendenteController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        System.out.println(dipendnti);
         return ResponseEntity.ok(dipendnti);
     }
     

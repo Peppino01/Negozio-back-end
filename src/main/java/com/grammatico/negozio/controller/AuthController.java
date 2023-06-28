@@ -6,62 +6,78 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grammatico.negozio.DTO.ClienteDTO;
-import com.grammatico.negozio.DTO.ClienteDTOMapper;
-import com.grammatico.negozio.DTO.LoginDTO;
-import com.grammatico.negozio.DTO.LoginDTOMapper;
+import com.grammatico.negozio.DTO.inputDTO.ClienteInputDTO;
+import com.grammatico.negozio.DTO.inputDTO.LoginInputDTO;
+import com.grammatico.negozio.DTO.inputDTO.mapper.ClienteInputDTOMapper;
+import com.grammatico.negozio.DTO.inputDTO.mapper.LoginInputDTOMapper;
+import com.grammatico.negozio.DTO.outputDTO.LoginOutputDTO;
+import com.grammatico.negozio.DTO.outputDTO.mapper.LoginOutputDTOMapper;
 import com.grammatico.negozio.model.Login;
+import com.grammatico.negozio.model.Ruolo;
 import com.grammatico.negozio.model.entity.Cliente;
-import com.grammatico.negozio.service.IClienteService;
+import com.grammatico.negozio.service.interfaces.IClienteService;
+import com.grammatico.negozio.service.interfaces.IDipendenteService;
+import com.grammatico.negozio.service.interfaces.IProprietarioService;
 
 @RestController
 public class AuthController {
 
-    private final LoginDTOMapper loginDTOMapper;
-    private final ClienteDTOMapper clienteDTOMapper;
+    private final LoginInputDTOMapper loginInputDTOMapper;
+    private final LoginOutputDTOMapper loginOutputDTOMapper;
+    private final ClienteInputDTOMapper clienteInputDTOMapper;
     private final IClienteService clienteService;
+    private final IDipendenteService dipendenteService;
+    private final IProprietarioService proprietarioService;
 
     public AuthController(
-        LoginDTOMapper loginDTOMapper,
-        ClienteDTOMapper clienteDTOMapper,
-        IClienteService clienteService
-        ) {
-        this.loginDTOMapper = loginDTOMapper;
-        this.clienteDTOMapper = clienteDTOMapper;
+        LoginInputDTOMapper loginInputDTOMapper,
+        LoginOutputDTOMapper loginOutputDTOMapper,
+        ClienteInputDTOMapper clienteInputDTOMapper,
+        IClienteService clienteService,
+        IDipendenteService dipendenteService,
+        IProprietarioService proprietarioService
+    ) {
+        this.loginInputDTOMapper = loginInputDTOMapper;
+        this.loginOutputDTOMapper = loginOutputDTOMapper;
+        this.clienteInputDTOMapper = clienteInputDTOMapper;
         this.clienteService = clienteService;
+        this.dipendenteService = dipendenteService;
+        this.proprietarioService = proprietarioService;
     }
     
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDTO loginRequest) {
-        Login login = loginDTOMapper.apply(loginRequest);
-        Cliente cliente;
-        ClienteDTO clienteDTO;
+    public ResponseEntity<LoginOutputDTO> login(@RequestBody LoginInputDTO loginInputDTO) {
+        // mappo loginInputDTO in un oggetto di tipo Login
+        Login login = loginInputDTOMapper.apply(loginInputDTO);
 
+        // controllo se le credenziali sono valide
         if (!login.isValid()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email o password non valide");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        if (!clienteService.checkClienteCredentials(login.getEmail(), login.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email o password errate");
-        }
-
+        // cerco l'utente proprietari, dipendenti e clienti
         try {
-            cliente = clienteService.getClienteFromEmail(login.getEmail());
-            if(cliente == null) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore durante la ricerca dell'utente");
+            if (clienteService.checkCredentials(login.getEmail(), login.getPassword())) {
+                return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.CLIENTE));
             }
-            clienteDTO = clienteDTOMapper.apply(cliente);
+            else if (dipendenteService.checkCredentials(login.getEmail(), login.getPassword())) {
+                return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.DIPENDENTE));
+            }
+            else if (proprietarioService.checkCredentials(login.getEmail(), login.getPassword())) {
+                return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.PROPRIETARIO));
+            }
+            else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
         } catch (Exception e) {
             System.out.println(e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
+            return ResponseEntity.internalServerError().build();
         }
-
-        return ResponseEntity.ok(clienteDTO);
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signup(@RequestBody ClienteDTO signinRequest) {
-        Cliente cliente = clienteDTOMapper.apply(signinRequest);
+    public ResponseEntity<String> signin(@RequestBody ClienteInputDTO clienteInputDTO) {
+        Cliente cliente = clienteInputDTOMapper.apply(clienteInputDTO);
 
         if (!cliente.isValid()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("I dati inseriti per la registrazione non sono validi");
@@ -80,7 +96,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore sconosciuto");
         }
         
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok().build();
     }
 
 }

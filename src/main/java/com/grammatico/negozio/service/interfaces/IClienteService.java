@@ -1,10 +1,10 @@
-package com.grammatico.negozio.service;
+package com.grammatico.negozio.service.interfaces;
 
 import com.grammatico.negozio.model.entity.Cliente;
 
 public interface IClienteService {
 
-    public boolean checkClienteCredentials(String email, String password);
+    public boolean checkCredentials(String email, String password);
 
     public boolean checkExistsByEmail(String email);
 

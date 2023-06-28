@@ -1,5 +1,10 @@
 package com.grammatico.negozio.service;
 
-public class TransazioneService implements ITransazioneService{
+import org.springframework.stereotype.Service;
+
+import com.grammatico.negozio.service.interfaces.ITransazioneService;
+
+@Service
+public class TransazioneService implements ITransazioneService {
     
 }

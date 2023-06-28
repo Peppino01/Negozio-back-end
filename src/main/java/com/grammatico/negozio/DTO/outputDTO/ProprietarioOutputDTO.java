@@ -1,18 +1,15 @@
-package com.grammatico.negozio.DTO;
+package com.grammatico.negozio.DTO.outputDTO;
 
 import java.sql.Date;
 
-import com.grammatico.negozio.model.Genere;
-
-public record ClienteDTO (
+public record ProprietarioOutputDTO (
     Long id,
     String nome,
     String cognome,
     String email,
     String password,
     String numTelefono,
-    Date dataNascita,
-    Genere genere
+    Date dataNascita
 ) {
     
 }

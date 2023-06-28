@@ -1,17 +1,18 @@
-package com.grammatico.negozio.DTO;
+package com.grammatico.negozio.DTO.outputDTO.mapper;
 
 import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
+import com.grammatico.negozio.DTO.outputDTO.TransazioneOutputDTO;
 import com.grammatico.negozio.model.entity.Transazione;
 
 @Service
-public class TransazioneDTOMapper implements Function<Transazione, TransazioneDTO>{
+public class TransazioneOutputDTOMapper implements Function<Transazione, TransazioneOutputDTO>{
 
     @Override
-    public TransazioneDTO apply(Transazione transazione) {
-        return new TransazioneDTO(
+    public TransazioneOutputDTO apply(Transazione transazione) {
+        return new TransazioneOutputDTO(
             transazione.getId(),
             transazione.getData(),
             transazione.getIdCliente(),

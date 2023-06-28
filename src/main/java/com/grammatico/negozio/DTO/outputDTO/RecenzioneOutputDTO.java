@@ -1,8 +1,8 @@
-package com.grammatico.negozio.DTO;
+package com.grammatico.negozio.DTO.outputDTO;
 
 import java.sql.Date;
 
-public record RecenzioneDTO (
+public record RecenzioneOutputDTO (
     Long id,
     Date dataPubblicazione,
     int valutazione,

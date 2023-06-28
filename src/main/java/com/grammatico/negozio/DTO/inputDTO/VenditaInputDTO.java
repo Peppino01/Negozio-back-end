@@ -1,6 +1,6 @@
-package com.grammatico.negozio.DTO;
+package com.grammatico.negozio.DTO.inputDTO;
 
-public record VenditaDTO (
+public record VenditaInputDTO (
     Long id,
     Long idTransazione,
     Long idProdotto,
