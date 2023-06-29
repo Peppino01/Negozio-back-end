@@ -16,9 +16,7 @@ public class RecenzioneOutputDTOMapper implements Function<Recenzione, Recenzion
             recenzione.getId(),
             recenzione.getDataPubblicazione(),
             recenzione.getValutazione(),
-            recenzione.getCommento(),
-            recenzione.getIdProdotto(),
-            recenzione.getIdCliente()
+            recenzione.getCommento()
         );
     }
     

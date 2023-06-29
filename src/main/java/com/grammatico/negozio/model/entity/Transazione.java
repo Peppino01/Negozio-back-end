@@ -1,12 +1,16 @@
 package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -23,9 +27,6 @@ public class Transazione {
     @Column(name = "data", nullable = false)
     private Date data;
     
-    @Column(name = "idCliente", nullable = false)
-    private Long idCliente;
-    
     @Column(name = "tipo", nullable = false)
     private String tipo;
     
@@ -35,18 +36,21 @@ public class Transazione {
     @Column(name = "info")
     private String info;
 
+    @OneToMany(targetEntity = Vendita.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_transazione", referencedColumnName = "id")
+    private List<Vendita> vendite;
+    
+
     public Transazione() {}
     
     public Transazione(
         Date data,
-        Long idCliente,
         String tipo,
         int prezzoTotale,
         String info
     ) {
         super();
         this.data = data;
-        this.idCliente = idCliente;
         this.tipo = tipo;
         this.prezzoTotale = prezzoTotale;
         this.info = info;
@@ -63,12 +67,6 @@ public class Transazione {
     }
     public void setData(Date data) {
         this.data = data;
-    }
-    public Long getIdCliente() {
-        return idCliente;
-    }
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
     }
     public String getTipo() {
         return tipo;
@@ -88,14 +86,19 @@ public class Transazione {
     public void setPrezzoTotale(int prezzoTotale) {
         this.prezzoTotale = prezzoTotale;
     }
+    public List<Vendita> getVendite() {
+        return vendite;
+    }
+    public void setVendite(List<Vendita> vendite) {
+        this.vendite = vendite;
+    }
 
     @Override
     public String toString() {
         return
-            "Dipendente{" +
+            "Transazione{" +
             "id=" + id +
             ", data=" + data +
-            ", idCliente=" + idCliente +
             ", tipo=" + tipo +
             ", prezzoTotale=" + prezzoTotale +
             ", info=" + info +

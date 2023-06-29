@@ -14,7 +14,6 @@ public class TransazioneInputDTOMapper implements Function<TransazioneInputDTO, 
     public Transazione apply(TransazioneInputDTO transazione) {
         return new Transazione(
             transazione.data(),
-            transazione.idCliente(),
             transazione.tipo(),
             transazione.prezzoTotale(),
             transazione.info()

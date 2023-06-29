@@ -1,9 +1,11 @@
 package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.grammatico.negozio.model.Genere;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +13,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -49,6 +53,15 @@ public class Cliente {
     @Column(name = "genere")
     @Enumerated(EnumType.STRING) // per definire la clonna genere come un enum (definito in Genere.java)
     private Genere genere;
+
+    @OneToMany(targetEntity = Transazione.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private List<Transazione> transazioni;
+
+    @OneToMany(targetEntity = Recenzione.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private List<Recenzione> recenzioni;
+    
     
     public Cliente() {}
     
@@ -126,11 +139,23 @@ public class Cliente {
     public void setGenere(Genere genere) {
         this.genere = genere;
     }
+    public List<Recenzione> getRecenzioni() {
+        return recenzioni;
+    }
+    public void setRecenzioni(List<Recenzione> recenzioni) {
+        this.recenzioni = recenzioni;
+    }
+    public List<Transazione> getTransazioni() {
+        return transazioni;
+    }
+    public void setTransazioni(List<Transazione> transazioni) {
+        this.transazioni = transazioni;
+    }
 
     @Override
     public String toString() {
         return
-            "Dipendente{" +
+            "Cliente{" +
             "id=" + id +
             ", nome=" + nome +
             ", cognome=" + cognome +

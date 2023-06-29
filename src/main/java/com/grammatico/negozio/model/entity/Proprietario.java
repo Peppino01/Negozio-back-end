@@ -1,12 +1,16 @@
 package com.grammatico.negozio.model.entity;
 
 import java.sql.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -42,6 +46,11 @@ public class Proprietario {
     @Column(name = "dataNascita")
     private Date dataNascita;
 
+    @OneToMany(targetEntity = Dipendente.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_proprietario", referencedColumnName = "id")
+    private List<Dipendente> dipendenti;
+    
+
     public Proprietario() {}
     
     public Proprietario(
@@ -61,6 +70,12 @@ public class Proprietario {
         this.dataNascita = dataNascita;
     }
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNome() {
         return nome;
     }
@@ -79,16 +94,16 @@ public class Proprietario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Date getdataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
-    public void setdataNascita(Date dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
-    public String getnumTelefono() {
+    public String getNumTelefono() {
         return numTelefono;
     }
-    public void setnumTelefono(String numTelefono) {
+    public void setNumTelefono(String numTelefono) {
         this.numTelefono = numTelefono;
     }
     public String getPassword() {
@@ -97,17 +112,17 @@ public class Proprietario {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Long getId() {
-        return id;
+    public List<Dipendente> getDipendenti() {
+        return dipendenti;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setDipendenti(List<Dipendente> dipendenti) {
+        this.dipendenti = dipendenti;
     }
 
     @Override
     public String toString() {
         return
-            "Dipendente{" +
+            "Proprietario{" +
             "id=" + id +
             ", nome=" + nome +
             ", cognome=" + cognome +

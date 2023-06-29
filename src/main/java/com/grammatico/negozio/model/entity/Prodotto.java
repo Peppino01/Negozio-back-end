@@ -1,14 +1,15 @@
 package com.grammatico.negozio.model.entity;
 
-import com.grammatico.negozio.model.StatoProdotto;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -30,29 +31,31 @@ public class Prodotto {
     
     @Column(name = "descrizione")
     private String descrizione;
+
+    @OneToMany(targetEntity = Vendita.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
+    private List<Vendita> vendite;
+
+    @OneToMany(targetEntity = Recenzione.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
+    private List<Recenzione> recenzioni;
+
+    @OneToMany(targetEntity = Inventario.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
+    private List<Inventario> inventario;
     
-    @Column(name = "quantita", nullable = false)
-    private int quantita;
-    
-    @Column(name = "stato", nullable = false)
-    @Enumerated(EnumType.STRING) // per definire la clonna stato come un enum (definito in StatoProdotto.java)
-    private StatoProdotto stato;
     
     public Prodotto() {}
     
     public Prodotto(
         String nome,
         int prezzo,
-        String descrizione,
-        int quantita,
-        StatoProdotto stato
+        String descrizione
     ) {
         super();
         this.nome = nome;
         this.prezzo = prezzo;
         this.descrizione = descrizione;
-        this.quantita = quantita;
-        this.stato = stato;
     }
 
     public Long getId() {
@@ -79,29 +82,33 @@ public class Prodotto {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    public StatoProdotto getStato() {
-        return stato;
+    public List<Inventario> getInventario() {
+        return inventario;
     }
-    public void setStato(StatoProdotto stato) {
-        this.stato = stato;
+    public void setInventario(List<Inventario> inventario) {
+        this.inventario = inventario;
     }
-    public int getQuantita() {
-        return quantita;
+    public List<Recenzione> getRecenzioni() {
+        return recenzioni;
     }
-    public void setQuantita(int quantita) {
-        this.quantita = quantita;
+    public void setRecenzioni(List<Recenzione> recenzioni) {
+        this.recenzioni = recenzioni;
+    }
+    public List<Vendita> getVendite() {
+        return vendite;
+    }
+    public void setVendite(List<Vendita> vendite) {
+        this.vendite = vendite;
     }
 
     @Override
     public String toString() {
         return
-            "Dipendente{" +
+            "Prodotto{" +
             "id=" + id +
             ", nome=" + nome +
             ", prezzo=" + prezzo +
             ", descrizione=" + descrizione +
-            ", quantita=" + quantita +
-            ", stato=" + stato +
             "}";
                
     }

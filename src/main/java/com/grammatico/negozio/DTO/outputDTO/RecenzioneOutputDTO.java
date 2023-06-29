@@ -6,9 +6,7 @@ public record RecenzioneOutputDTO (
     Long id,
     Date dataPubblicazione,
     int valutazione,
-    String commento,
-    Long idProdotto,
-    Long idCliente
+    String commento
 ) {
     
 }

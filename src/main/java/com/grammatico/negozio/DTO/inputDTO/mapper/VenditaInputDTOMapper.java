@@ -13,10 +13,7 @@ public class VenditaInputDTOMapper implements Function<VenditaInputDTO, Vendita>
     @Override
     public Vendita apply(VenditaInputDTO vendita) {
         return new Vendita(
-            vendita.idTransazione(),
-            vendita.idProdotto(),
-            vendita.quantita(),
-            vendita.prezzoUnitario()
+            vendita.quantita()
         );
     }
     

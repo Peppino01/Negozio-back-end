@@ -18,8 +18,9 @@ public class ProprietarioOutputDTOMapper implements Function<Proprietario, Propr
             proprietario.getCognome(),
             proprietario.getEmail(),
             proprietario.getPassword(),
-            proprietario.getnumTelefono(),
-            proprietario.getdataNascita()
+            proprietario.getNumTelefono(),
+            proprietario.getDataNascita(),
+            proprietario.getDipendenti()
         );
     }
     

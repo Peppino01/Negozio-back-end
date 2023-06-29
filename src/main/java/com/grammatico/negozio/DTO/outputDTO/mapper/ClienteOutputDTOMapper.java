@@ -20,7 +20,9 @@ public class ClienteOutputDTOMapper implements Function<Cliente, ClienteOutputDT
             cliente.getPassword(),
             cliente.getNumTelefono(),
             cliente.getDataNascita(),
-            cliente.getGenere()
+            cliente.getGenere(),
+            cliente.getTransazioni(),
+            cliente.getRecenzioni()
         );
     }
     

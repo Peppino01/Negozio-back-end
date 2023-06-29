@@ -14,10 +14,7 @@ public class VenditaOutputDTOMapper implements Function<Vendita, VenditaOutputDT
     public VenditaOutputDTO apply(Vendita vendita) {
         return new VenditaOutputDTO(
             vendita.getId(),
-            vendita.getidTransazione(),
-            vendita.getidProdotto(),
-            vendita.getquantita(),
-            vendita.getprezzoUnitario()
+            vendita.getQuantita()
         );
     }
     

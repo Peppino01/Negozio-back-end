@@ -15,9 +15,7 @@ public class RecenzioneInputDTOMapper implements Function<RecenzioneInputDTO, Re
         return new Recenzione(
             recenzione.dataPubblicazione(),
             recenzione.valutazione(),
-            recenzione.commento(),
-            recenzione.idProdotto(),
-            recenzione.idCliente()
+            recenzione.commento()
         );
     }
     

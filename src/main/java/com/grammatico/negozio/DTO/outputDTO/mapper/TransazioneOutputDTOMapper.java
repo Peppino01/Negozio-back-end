@@ -15,10 +15,10 @@ public class TransazioneOutputDTOMapper implements Function<Transazione, Transaz
         return new TransazioneOutputDTO(
             transazione.getId(),
             transazione.getData(),
-            transazione.getIdCliente(),
             transazione.getTipo(),
             transazione.getPrezzoTotale(),
-            transazione.getInfo()
+            transazione.getInfo(),
+            transazione.getVendite()
         );
     }
     
