@@ -33,8 +33,7 @@ public class Inventario {
 
     public Inventario(
         int quantità,
-        StatoProdotto stato,
-        Prodotto prodotto
+        StatoProdotto stato
     ) {
         this.quantita = quantità;
         this.stato = stato;
