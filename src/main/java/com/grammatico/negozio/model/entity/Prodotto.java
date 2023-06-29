@@ -11,10 +11,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 
 @Table(
-    name = "prodotti"
+    name = "prodotti",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "prodotto_nome_unique", columnNames = "nome") // email unique
+    }
 )
 @Entity(name = "Prodotto")
 public class Prodotto {
