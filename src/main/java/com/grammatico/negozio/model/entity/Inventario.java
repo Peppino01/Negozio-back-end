@@ -39,6 +39,16 @@ public class Inventario {
         this.stato = stato;
     }
 
+    public Inventario(
+        Long id,
+        int quantità,
+        StatoProdotto stato
+    ) {
+        this.id = id;
+        this.quantita = quantità;
+        this.stato = stato;
+    }
+
     public Long getId() {
         return id;
     }
