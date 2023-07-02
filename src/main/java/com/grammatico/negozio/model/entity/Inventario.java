@@ -1,5 +1,11 @@
 package com.grammatico.negozio.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
+import com.grammatico.negozio.DTO.inputDTO.InventarioInputDTO;
 import com.grammatico.negozio.model.StatoProdotto;
 
 import jakarta.persistence.Column;
@@ -77,6 +83,43 @@ public class Inventario {
             ", descrizione=" + stato +
             "}";
                
+    }
+
+    public static boolean validForOneProdotto(List<Inventario> inventario) {
+        // controllo se gli inventari inviati sono 4
+        if (inventario.size() != 4) {
+            System.out.println("Un inventario prodotto deve avere 4 elementi");
+            return false;
+        }
+        
+        // controllo che tutti gli stati e gli id siano diversi
+        List<StatoProdotto> statiControllati = new ArrayList<>();
+        List<Long> idControllati = new ArrayList<>();
+        for (Inventario inv : inventario) {
+            if (statiControllati.contains(inv.getStato())) {
+                System.out.println("Un inventario prodotto non può avere più di un tipo di stato");
+                return false;
+            } else if (idControllati.contains(inv.getId())) {
+                if (inv.getId() != null) {
+                    System.out.println("Un inventario prodotto deve riferirsi solo ad un prodotto");
+                    return false;
+                }
+            } else {
+                statiControllati.add(inv.getStato());
+                idControllati.add(inv.getId());
+            }
+        }
+
+        // controllo che tutte le quantità non siano negative
+        for (Inventario inv : inventario) {
+            if (inv.getQuantita() < 0) {
+                System.out.println("La quantità non può essere minore di zero");
+                return false;
+            }
+        }
+
+        // se tutto va bene
+        return true;
     }
     
 }

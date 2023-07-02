@@ -35,27 +35,13 @@ public class InventarioController {
     public ResponseEntity<String> updateInventarioProdotto(
         @RequestBody() List<InventarioInputDTO> inventarioInputDTO
     ) {
-        // controllo se gli inventari inviati sono 4
-        if (inventarioInputDTO.size() != 4) {
-            return ResponseEntity.internalServerError().body("E' possibile cambiare solo 4 inventariProdotto alla volta");
-        }
-        
-        // controllo che tutti gli stati e gli id siano diversi
-        List<StatoProdotto> statiControllati = new ArrayList<>();
-        List<Long> idControllati = new ArrayList<>();
-        for (InventarioInputDTO invInDTO : inventarioInputDTO) {
-            if (statiControllati.contains(invInDTO.stato())) {
-                return ResponseEntity.internalServerError().body("Non è possibile cambiare più di un tipo di stato alla volta");
-            } else if (idControllati.contains(invInDTO.id())) {
-                return ResponseEntity.internalServerError().body("Non è possibile due inventari con lo stesso id");
-            } else {
-                statiControllati.add(invInDTO.stato());
-                idControllati.add(invInDTO.id());
-            }
-        }
-
         // ricavo l'inventario da inventarioInputDTO
         List<Inventario> inventario = inventarioInputDTO.stream().map(inventarioInputDTOMapper).collect(Collectors.toList());
+        
+        // controllo se l'inventario prodotto è valido
+        if (!Inventario.validForOneProdotto(inventario)) {
+            return ResponseEntity.internalServerError().body("L'inventario prodotto non è valido");
+        }
 
         // controllo che tutti gli inventari esistano già
         for (Inventario inv : inventario) {

@@ -9,6 +9,7 @@ import com.grammatico.negozio.DTO.outputDTO.ProdottoInventarioOutputDTO;
 import com.grammatico.negozio.DTO.outputDTO.ProdottoOutputDTO;
 import com.grammatico.negozio.DTO.outputDTO.mapper.ProdottoOutputDTOMapper;
 import com.grammatico.negozio.model.StatoProdotto;
+import com.grammatico.negozio.model.entity.Prodotto;
 import com.grammatico.negozio.repository.ProdottoRepository;
 import com.grammatico.negozio.service.interfaces.IProdottoService;
 
@@ -38,6 +39,26 @@ public class ProdottoService implements IProdottoService {
         } else {
             return prodottoRepository.getProdottiInventarioFromStato(statoProdotto);
         }
+    }
+
+    @Override
+    public boolean saveProdotto(Prodotto prodotto) {
+        if (prodottoRepository.save(prodotto) instanceof Prodotto) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
+    @Override
+    public boolean checkNomeExists(String nome) {
+        if (nome != null) {
+            return prodottoRepository.existsByNome(nome);
+        } else {
+            return false;
+        }
+        
     }
     
 }

@@ -62,6 +62,23 @@ public class Prodotto {
         this.descrizione = descrizione;
     }
 
+    public Prodotto(
+        String nome,
+        int prezzo,
+        String descrizione,
+        List<Vendita> vendite,
+        List<Recenzione> recenzioni,
+        List<Inventario> inventario
+    ) {
+        super();
+        this.nome = nome;
+        this.prezzo = prezzo;
+        this.descrizione = descrizione;
+        this.vendite = vendite;
+        this.recenzioni = recenzioni;
+        this.inventario = inventario;
+    }
+
     public Long getId() {
         return id;
     }
@@ -113,6 +130,9 @@ public class Prodotto {
             ", nome=" + nome +
             ", prezzo=" + prezzo +
             ", descrizione=" + descrizione +
+            ", nome=" + vendite +
+            ", prezzo=" + recenzioni +
+            ", descrizione=" + inventario +
             "}";
                
     }

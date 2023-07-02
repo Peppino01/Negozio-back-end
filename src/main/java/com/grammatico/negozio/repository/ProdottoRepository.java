@@ -25,5 +25,7 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
         "JOIN p.inventario i "
     )
     List<ProdottoInventarioOutputDTO> getAllProdottiInventario();
+
+    boolean existsByNome(String nome);
     
 }
