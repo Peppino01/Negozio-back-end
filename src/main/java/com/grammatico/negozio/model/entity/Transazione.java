@@ -30,8 +30,8 @@ public class Transazione {
     @Column(name = "tipo", nullable = false)
     private String tipo;
     
-    @Column(name = "prezzoTotale", nullable = false)
-    private int prezzoTotale; // un pò ridondante, si potrebbe ricavare da vendite
+    @Column(name = "prezzoTotale")
+    private Integer prezzoTotale;
     
     @Column(name = "info")
     private String info;
@@ -46,7 +46,7 @@ public class Transazione {
     public Transazione(
         Date data,
         String tipo,
-        int prezzoTotale,
+        Integer prezzoTotale,
         String info
     ) {
         super();
@@ -80,10 +80,10 @@ public class Transazione {
     public void setInfo(String info) {
         this.info = info;
     }
-    public int getPrezzoTotale() {
+    public Integer getPrezzoTotale() {
         return prezzoTotale;
     }
-    public void setPrezzoTotale(int prezzoTotale) {
+    public void setPrezzoTotale(Integer prezzoTotale) {
         this.prezzoTotale = prezzoTotale;
     }
     public List<Vendita> getVendite() {

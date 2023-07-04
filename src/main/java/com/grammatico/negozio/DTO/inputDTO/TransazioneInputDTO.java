@@ -9,7 +9,7 @@ public record TransazioneInputDTO (
     Long id,
     Date data,
     String tipo,
-    int prezzoTotale,
+    Integer prezzoTotale,
     String info,
     List<Vendita> vendite
 ) {

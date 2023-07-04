@@ -3,9 +3,6 @@ package com.grammatico.negozio.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
-import com.grammatico.negozio.DTO.inputDTO.InventarioInputDTO;
 import com.grammatico.negozio.model.StatoProdotto;
 
 import jakarta.persistence.Column;

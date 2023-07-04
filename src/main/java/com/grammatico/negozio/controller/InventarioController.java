@@ -1,6 +1,5 @@
 package com.grammatico.negozio.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grammatico.negozio.DTO.inputDTO.InventarioInputDTO;
 import com.grammatico.negozio.DTO.inputDTO.mapper.InventarioInputDTOMapper;
-import com.grammatico.negozio.model.StatoProdotto;
 import com.grammatico.negozio.model.entity.Inventario;
 import com.grammatico.negozio.service.InventarioService;
 
