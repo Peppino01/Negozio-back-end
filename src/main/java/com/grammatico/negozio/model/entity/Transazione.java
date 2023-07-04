@@ -30,7 +30,7 @@ public class Transazione {
     @Column(name = "tipo", nullable = false)
     private String tipo;
     
-    @Column(name = "prezzoTotale")
+    @Column(name = "prezzoTotale", nullable = false)
     private Integer prezzoTotale;
     
     @Column(name = "info")
@@ -39,6 +39,9 @@ public class Transazione {
     @OneToMany(targetEntity = Vendita.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_transazione", referencedColumnName = "id")
     private List<Vendita> vendite;
+
+    @Column(name = "id_cliente")
+    private Long idCliente;
     
 
     public Transazione() {}
@@ -92,6 +95,12 @@ public class Transazione {
     public void setVendite(List<Vendita> vendite) {
         this.vendite = vendite;
     }
+    public Long getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
 
     @Override
     public String toString() {
@@ -102,6 +111,7 @@ public class Transazione {
             ", tipo=" + tipo +
             ", prezzoTotale=" + prezzoTotale +
             ", info=" + info +
+            ", id cliente=" + idCliente +
             "}";
                
     }

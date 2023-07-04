@@ -20,6 +20,12 @@ public class Vendita {
     
     @Column(name = "quantita", nullable = false)
     private int quantita;
+
+    @Column(name = "id_transazione", nullable = false)
+    private Long idTransazione;
+
+    @Column(name = "id_prodotto", nullable = false)
+    private Long idProdotto;
     
     
     public Vendita() {}
@@ -43,6 +49,18 @@ public class Vendita {
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
+    public Long getIdProdotto() {
+        return idProdotto;
+    }
+    public void setIdProdotto(Long idProdotto) {
+        this.idProdotto = idProdotto;
+    }
+    public Long getIdTransazione() {
+        return idTransazione;
+    }
+    public void setIdTransazione(Long idTransazione) {
+        this.idTransazione = idTransazione;
+    }
 
     @Override
     public String toString() {
@@ -50,6 +68,8 @@ public class Vendita {
             "Vendita{" +
             "id=" + id +
             ", quantita=" + quantita +
+            ", id transazione=" + idTransazione +
+            ", id prodotto=" + idProdotto +
             "}";
                
     }
