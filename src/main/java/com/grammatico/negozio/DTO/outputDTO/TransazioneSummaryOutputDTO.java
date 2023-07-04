@@ -6,8 +6,7 @@ public record TransazioneSummaryOutputDTO (
     Long id,
     Date data,
     String tipo,
-    Integer prezzoTotale,
-    String info
+    Integer prezzoTotale
 ) {
     
 }

@@ -16,8 +16,7 @@ public class TransazioneSummaryOutputDTOMapper implements Function<Transazione, 
             transazione.getId(),
             transazione.getData(),
             transazione.getTipo(),
-            transazione.getPrezzoTotale(),
-            transazione.getInfo()
+            transazione.getPrezzoTotale()
         );
     }
     
