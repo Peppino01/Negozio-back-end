@@ -50,13 +50,15 @@ public class Transazione {
         Date data,
         String tipo,
         Integer prezzoTotale,
-        String info
+        String info,
+        List<Vendita> vendite
     ) {
         super();
         this.data = data;
         this.tipo = tipo;
         this.prezzoTotale = prezzoTotale;
         this.info = info;
+        this.vendite = vendite;
     }
 
     public Long getId() {

@@ -16,7 +16,8 @@ public class TransazioneInputDTOMapper implements Function<TransazioneInputDTO, 
             transazione.data(),
             transazione.tipo(),
             transazione.prezzoTotale(),
-            transazione.info()
+            transazione.info(),
+            transazione.vendite()
         );
     }
     

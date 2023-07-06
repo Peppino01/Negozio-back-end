@@ -6,7 +6,6 @@ import java.util.List;
 import com.grammatico.negozio.model.entity.Vendita;
 
 public record TransazioneInputDTO (
-    Long id,
     Date data,
     String tipo,
     Integer prezzoTotale,

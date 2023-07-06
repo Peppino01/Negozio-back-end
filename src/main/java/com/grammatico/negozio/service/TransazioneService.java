@@ -110,7 +110,11 @@ public class TransazioneService implements ITransazioneService {
         } else {
             return null;
         }
+    }
 
+    @Override
+    public Transazione insertTransazione(Transazione transazione) {
+        return this.transazioneRepository.save(transazione);
     }
     
 }
