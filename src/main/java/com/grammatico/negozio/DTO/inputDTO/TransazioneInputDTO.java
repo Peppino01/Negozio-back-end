@@ -1,6 +1,6 @@
 package com.grammatico.negozio.DTO.inputDTO;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.grammatico.negozio.model.entity.Vendita;

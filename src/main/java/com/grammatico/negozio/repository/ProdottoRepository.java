@@ -12,6 +12,8 @@ import com.grammatico.negozio.model.entity.Prodotto;
 
 public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
+    Prodotto findByNome(String nome);
+
     @Query(
         "SELECT new com.grammatico.negozio.DTO.outputDTO.ProdottoInventarioOutputDTO(p.nome, i.stato, i.quantita, p.prezzo, p.descrizione) " +
         "FROM Prodotto p " +
@@ -36,5 +38,14 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
         "WHERE v.idTransazione = :idTransazione"
     )
     List<VenditaProdottoOutputDTO> getAllVenditeProdottoFromIdTransazione(Long idTransazione);
+
+    @Query(
+        "SELECT quantita " +
+        "FROM Prodotto p " +
+        "JOIN p.inventario i " +
+        "WHERE p.nome = :nomeProdotto AND " +
+        "i.stato = :statoProdotto"
+    )
+    int countInventarioProdotto(String nomeProdotto, StatoProdotto statoProdotto);
     
 }

@@ -1,6 +1,6 @@
 package com.grammatico.negozio.model.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -45,6 +45,22 @@ public class Transazione {
     
 
     public Transazione() {}
+
+    public Transazione(
+        Date data,
+        String tipo,
+        Integer prezzoTotale,
+        String info,
+        List<Vendita> vendite,
+        Long idCliente
+    ) {
+        this.data = data;
+        this.tipo = tipo;
+        this.prezzoTotale = prezzoTotale;
+        this.info = info;
+        this.vendite = vendite;
+        this.idCliente = idCliente;
+    }
     
     public Transazione(
         Date data,
@@ -53,7 +69,6 @@ public class Transazione {
         String info,
         List<Vendita> vendite
     ) {
-        super();
         this.data = data;
         this.tipo = tipo;
         this.prezzoTotale = prezzoTotale;

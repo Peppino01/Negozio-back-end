@@ -8,6 +8,8 @@ public interface IClienteService {
 
     public boolean checkExistsByEmail(String email);
 
+    public boolean checkExistsById(Long id);
+
     public Cliente insertCliente(Cliente cliente);
 
     public Cliente getClienteFromEmail(String email);

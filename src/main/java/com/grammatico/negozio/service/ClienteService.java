@@ -35,6 +35,11 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
+    public boolean checkExistsById(Long id) {
+        return clienteRepository.existsById(id);
+    }
+
+    @Override
     public Cliente insertCliente(Cliente cliente) {
         return clienteRepository.save(cliente);
     }

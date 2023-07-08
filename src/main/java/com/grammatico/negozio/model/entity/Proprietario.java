@@ -1,6 +1,6 @@
 package com.grammatico.negozio.model.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;

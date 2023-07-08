@@ -1,6 +1,6 @@
 package com.grammatico.negozio.DTO.outputDTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 public record TransazioneSummaryOutputDTO (
     Long id,

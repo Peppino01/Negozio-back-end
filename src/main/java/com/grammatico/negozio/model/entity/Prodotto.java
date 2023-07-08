@@ -17,7 +17,7 @@ import jakarta.persistence.UniqueConstraint;
 @Table(
     name = "prodotti",
     uniqueConstraints = {
-        @UniqueConstraint(name = "prodotto_nome_unique", columnNames = "nome") // email unique
+        @UniqueConstraint(name = "prodotto_nome_unique", columnNames = "nome") // nome unique
     }
 )
 @Entity(name = "Prodotto")

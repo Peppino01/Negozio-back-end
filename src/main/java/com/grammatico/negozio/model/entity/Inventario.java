@@ -31,8 +31,23 @@ public class Inventario {
     @Enumerated(EnumType.STRING) // per definire la clonna stato come un enum (definito in StatoProdotto.java)
     private StatoProdotto stato;
 
+    @Column(name = "id_prodotto")
+    private Long idProdotto;
+
 
     public Inventario() {}
+
+    public Inventario(
+        Long id,
+        int quantità,
+        StatoProdotto stato,
+        Long idProdotto
+    ) {
+        this.id = id;
+        this.quantita = quantità;
+        this.stato = stato;
+        this.idProdotto = idProdotto;
+    }
 
     public Inventario(
         int quantità,

@@ -21,7 +21,7 @@ public class Vendita {
     @Column(name = "quantita", nullable = false)
     private int quantita;
 
-    @Column(name = "id_transazione", nullable = false)
+    @Column(name = "id_transazione")
     private Long idTransazione;
 
     @Column(name = "id_prodotto", nullable = false)
@@ -29,11 +29,18 @@ public class Vendita {
     
     
     public Vendita() {}
+
+    public Vendita(
+        int quantita,
+        Long idProdotto
+    ) {
+        this.quantita = quantita;
+        this.idProdotto = idProdotto;
+    }
     
     public Vendita(
         int quantita
     ) {
-        super();
         this.quantita = quantita;
     }
 

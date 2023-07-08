@@ -9,6 +9,10 @@ import com.grammatico.negozio.model.entity.Prodotto;
 
 public interface IProdottoService {
 
+    public Long getIdFromNome(String nome);
+
+    public Integer getPrezzoFromNome(String nome);
+
     public List<ProdottoOutputDTO> getAll();
 
     public List<ProdottoInventarioOutputDTO> getProdottiInventarioFromStato(StatoProdotto statoProdotto);
@@ -16,5 +20,7 @@ public interface IProdottoService {
     public boolean saveProdotto(Prodotto prodotto);
 
     public boolean checkNomeExists(String nome);
+
+    public Integer getQuantitaFromStatoAndNomeProdotto(StatoProdotto stato, String nome);
     
 }

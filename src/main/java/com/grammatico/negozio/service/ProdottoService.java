@@ -42,13 +42,30 @@ public class ProdottoService implements IProdottoService {
     }
 
     @Override
+    public Long getIdFromNome(String nome) {
+        Prodotto prodotto = prodottoRepository.findByNome(nome);
+        if (prodotto != null) {
+            return prodotto.getId();
+        }
+        return null;
+    }
+
+    @Override
+    public Integer getPrezzoFromNome(String nome) {
+        Prodotto prodotto = prodottoRepository.findByNome(nome);
+        if (prodotto != null) {
+            return prodotto.getPrezzo();
+        }
+        return null;
+    }
+
+    @Override
     public boolean saveProdotto(Prodotto prodotto) {
         if (prodottoRepository.save(prodotto) instanceof Prodotto) {
             return true;
         } else {
             return false;
         }
-        
     }
 
     @Override
@@ -58,7 +75,17 @@ public class ProdottoService implements IProdottoService {
         } else {
             return false;
         }
-        
+    }
+
+    public Integer getQuantitaFromStatoAndNomeProdotto(StatoProdotto stato, String nome) {
+        if (stato == null) {
+            return null;
+        }
+        if (nome.isEmpty()) {
+            return null;
+        }
+
+        return prodottoRepository.countInventarioProdotto(nome, stato);
     }
     
 }
