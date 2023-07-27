@@ -48,6 +48,10 @@ public class Prodotto {
     @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
     private List<Inventario> inventario;
     
+    @OneToMany(targetEntity = ProdottoCarrello.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
+    private List<ProdottoCarrello> carrello;
+    
     
     public Prodotto() {}
     
@@ -121,6 +125,12 @@ public class Prodotto {
     public void setVendite(List<Vendita> vendite) {
         this.vendite = vendite;
     }
+    public List<ProdottoCarrello> getCarrello() {
+        return carrello;
+    }
+    public void setCarrello(List<ProdottoCarrello> carrello) {
+        this.carrello = carrello;
+    }
 
     @Override
     public String toString() {
@@ -133,6 +143,7 @@ public class Prodotto {
             ", nome=" + vendite +
             ", prezzo=" + recenzioni +
             ", descrizione=" + inventario +
+            ", carrello=" + carrello +
             "}";
                
     }

@@ -74,3 +74,12 @@ VALUES
     (2, 3, 3),
     (4, 5, 7);
 
+-- popolamento del carrello
+INSERT INTO carrello (quantita, id_prodotto, id_cliente)
+VALUES
+    (3, 5, 1),
+    (2, 1, 1),
+    (5, 4, 1),
+    (1, 2, 2),
+    (3, 3, 2),
+    (7, 1, 3);

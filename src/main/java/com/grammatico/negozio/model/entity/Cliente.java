@@ -61,6 +61,10 @@ public class Cliente {
     @OneToMany(targetEntity = Recenzione.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private List<Recenzione> recenzioni;
+
+    @OneToMany(targetEntity = ProdottoCarrello.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
+    private List<ProdottoCarrello> carrello;
     
     
     public Cliente() {}
@@ -151,6 +155,12 @@ public class Cliente {
     public void setTransazioni(List<Transazione> transazioni) {
         this.transazioni = transazioni;
     }
+    public List<ProdottoCarrello> getCarrello() {
+        return carrello;
+    }
+    public void setCarrello(List<ProdottoCarrello> carrello) {
+        this.carrello = carrello;
+    }
 
     @Override
     public String toString() {
@@ -163,6 +173,7 @@ public class Cliente {
             ", password=" + password +
             ", numTelefono=" + numTelefono +
             ", dataNascita=" + dataNascita +
+            ", carrello=" + carrello +
             "}";
                
     }

@@ -1,8 +1,5 @@
 package com.grammatico.negozio.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.grammatico.negozio.model.StatoProdotto;

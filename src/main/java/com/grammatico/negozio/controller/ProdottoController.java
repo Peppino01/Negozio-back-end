@@ -1,21 +1,17 @@
 package com.grammatico.negozio.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grammatico.negozio.DTO.inputDTO.ProdottoCarrelloInputDTO;
 import com.grammatico.negozio.DTO.inputDTO.ProdottoInputDTO;
 import com.grammatico.negozio.DTO.inputDTO.mapper.ProdottoInputDTOMapper;
 import com.grammatico.negozio.DTO.outputDTO.ProdottoInventarioOutputDTO;
@@ -23,8 +19,6 @@ import com.grammatico.negozio.DTO.outputDTO.ProdottoOutputDTO;
 import com.grammatico.negozio.model.StatoProdotto;
 import com.grammatico.negozio.model.entity.Inventario;
 import com.grammatico.negozio.model.entity.Prodotto;
-import com.grammatico.negozio.model.entity.Transazione;
-import com.grammatico.negozio.model.entity.Vendita;
 import com.grammatico.negozio.service.ClienteService;
 import com.grammatico.negozio.service.InventarioService;
 import com.grammatico.negozio.service.ProdottoService;
@@ -145,90 +139,5 @@ public class ProdottoController {
             return ResponseEntity.internalServerError().body("Errore sconosciuto durante il salvataggio del prodotto");
         }
     }
-
-    @PatchMapping("/compra")
-    public ResponseEntity<String> compraProdotti(
-        @RequestParam Long idCliente,
-        @RequestParam String info,
-        @RequestBody List<ProdottoCarrelloInputDTO> carrello
-    ) {
-
-        // controllo che esista un cliente con l'id dato
-        if (!clienteService.checkExistsById(idCliente)) {
-            return ResponseEntity.badRequest().body("Non esiste un cliente con l'id inserito");
-        }
-
-        // per ogni prodotto nel carrello
-        for (ProdottoCarrelloInputDTO prodottoCarrello : carrello) {
-            // controllo che esistano dei prodotti con i nomi dati
-            if (!prodottoService.checkNomeExists(prodottoCarrello.nome())) {
-                return ResponseEntity.badRequest().body("Non esiste un prodotto con nome: " + prodottoCarrello.nome());
-            }
-
-            // controllo la validità del parametro quantia
-            if (prodottoCarrello.quantita() <= 0) {
-                return ResponseEntity.badRequest().body("La quantità deve essere positiva");
-            }
-            if (prodottoCarrello.quantita() > prodottoService.getQuantitaFromStatoAndNomeProdotto(StatoProdotto.DISPONIBILE, prodottoCarrello.nome())) {
-                return ResponseEntity.badRequest().body("Non ci sono abbastanza prodotti (" + prodottoCarrello.nome() + ") disponibili");
-            }
-        }
-
-        // per ogni prodotto nel carrello sposto la quantità di prodotti da disponibili a venduti
-        try {
-            for (ProdottoCarrelloInputDTO prodottoCarrello : carrello) {
-                inventarioService.compraProdotto(prodottoService.getIdFromNome(prodottoCarrello.nome()), prodottoCarrello.quantita());
-            }
-        } catch (Exception e) {
-             System.out.println(e);
-            return ResponseEntity.internalServerError().body("Errore sconosciuto durante l'acquisto dei prodotti");
-        }
-
-        // creo la transazione associata ai prodotti acquistati dal cliente
-        List<Vendita> vendite = new ArrayList<>();
-        Transazione transazione;
-        try {
-            // creo una vendita per ogni prodotto
-            for (ProdottoCarrelloInputDTO prodottoCarrello : carrello) {
-                vendite.add(
-                    new Vendita(
-                        prodottoCarrello.quantita(),
-                        prodottoService.getIdFromNome(prodottoCarrello.nome())
-                    )
-                );
-            }
-
-            // calcolo il prezzo totale della transazione
-            Integer prezzoTotale = 0;
-            for (ProdottoCarrelloInputDTO prodottoCarrello : carrello) {
-                prezzoTotale += prodottoService.getPrezzoFromNome(prodottoCarrello.nome()) * prodottoCarrello.quantita();
-            }
-
-            // creo la transazione con le vendite create
-            transazione = new Transazione(
-                (Date) Calendar.getInstance().getTime(),
-                "Acquisto prodotto",
-                prezzoTotale,
-                info,
-                vendite,
-                idCliente
-            );
-            
-        } catch (Exception e) {
-            System.out.println(e);
-            return ResponseEntity.internalServerError().body("Errore sconosciuto durante la creazione della transazione");
-        }
-
-        // salvo la nuova transazione
-        try {
-            transazioneService.insertTransazione(transazione);
-        } catch (Exception e) {
-            System.out.println(e);
-            return ResponseEntity.internalServerError().body("Errore sconosciuto durante il salvataggio della transazione");
-        }
-        
-        return ResponseEntity.ok("Prodotti comprati!");
-    }
-
     
 }
