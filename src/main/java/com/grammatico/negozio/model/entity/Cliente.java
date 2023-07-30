@@ -22,7 +22,7 @@ import jakarta.persistence.UniqueConstraint;
 @Table(
     name = "clienti",
     uniqueConstraints = {
-        @UniqueConstraint(name = "propietario_email_unique", columnNames = "email") // email unique
+        @UniqueConstraint(name = "cliente_email_unique", columnNames = "email") // email unique
     }
 )
 @Entity(name = "Cliente")
@@ -58,9 +58,9 @@ public class Cliente {
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
     private List<Transazione> transazioni;
 
-    @OneToMany(targetEntity = Recenzione.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Recensione.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    private List<Recenzione> recenzioni;
+    private List<Recensione> recensioni;
 
     @OneToMany(targetEntity = ProdottoCarrello.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_cliente", referencedColumnName = "id")
@@ -143,11 +143,11 @@ public class Cliente {
     public void setGenere(Genere genere) {
         this.genere = genere;
     }
-    public List<Recenzione> getRecenzioni() {
-        return recenzioni;
+    public List<Recensione> getRecensioni() {
+        return recensioni;
     }
-    public void setRecenzioni(List<Recenzione> recenzioni) {
-        this.recenzioni = recenzioni;
+    public void setRecensioni(List<Recensione> recensioni) {
+        this.recensioni = recensioni;
     }
     public List<Transazione> getTransazioni() {
         return transazioni;

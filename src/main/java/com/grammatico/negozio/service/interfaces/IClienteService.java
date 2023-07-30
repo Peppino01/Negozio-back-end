@@ -13,5 +13,7 @@ public interface IClienteService {
     public Cliente insertCliente(Cliente cliente);
 
     public Cliente getClienteFromEmail(String email);
+
+    public Cliente getClienteFromId(Long id);
     
 }

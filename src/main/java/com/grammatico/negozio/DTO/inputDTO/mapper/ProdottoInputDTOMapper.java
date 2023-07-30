@@ -17,7 +17,7 @@ public class ProdottoInputDTOMapper implements Function<ProdottoInputDTO, Prodot
             prodotto.prezzo(),
             prodotto.descrizione(),
             prodotto.vendite(),
-            prodotto.recenzioni(),
+            prodotto.recensioni(),
             prodotto.inventario()
         );
     }

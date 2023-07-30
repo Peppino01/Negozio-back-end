@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.grammatico.negozio.model.Genere;
-import com.grammatico.negozio.model.entity.Recenzione;
+import com.grammatico.negozio.model.entity.Recensione;
 import com.grammatico.negozio.model.entity.Transazione;
 
 public record ClienteOutputDTO (
@@ -17,7 +17,7 @@ public record ClienteOutputDTO (
     Date dataNascita,
     Genere genere,
     List<Transazione> transazioni,
-    List<Recenzione> recenzioni
+    List<Recensione> recensioni
 ) {
     
 }

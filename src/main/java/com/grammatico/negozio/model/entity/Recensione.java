@@ -11,10 +11,10 @@ import jakarta.persistence.Table;
 
 
 @Table(
-    name = "recenzioni"
+    name = "recensioni"
 )
-@Entity(name = "Recenzione")
-public class Recenzione {
+@Entity(name = "Recensione")
+public class Recensione {
 
     @Id // chiave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // generata automaticamente e di tipo auto increment
@@ -29,18 +29,28 @@ public class Recenzione {
     @Column(name = "commento")
     private String commento;
 
+    @Column(name = "id_prodotto")
+    private Long idProdotto;
+
+    @Column(name = "id_cliente")
+    private Long idCliente;
+
     
-    public Recenzione() {}
+    public Recensione() {}
     
-    public Recenzione(
+    public Recensione(
         Date dataPubblicazione,
         int valutazione,
-        String commento
+        String commento,
+        Long idProdotto,
+        Long idCliente
     ) {
         super();
         this.dataPubblicazione = dataPubblicazione;
         this.valutazione = valutazione;
         this.commento = commento;
+        this.idProdotto = idProdotto;
+        this.idCliente = idCliente;
     }
 
     public Long getId() {
@@ -67,18 +77,31 @@ public class Recenzione {
     public void setCommento(String commento) {
         this.commento = commento;
     }
+    public Long getIdProdotto() {
+        return idProdotto;
+    }
+    public void setIdProdotto(Long idProdotto) {
+        this.idProdotto = idProdotto;
+    }
+    public Long getIdCliente() {
+        return idCliente;
+    }
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
+    }
+    
 
     @Override
     public String toString() {
         return
-            "Recenzione{" +
+            "Recensione{" +
             "id=" + id +
             ", dataPubblicazione=" + dataPubblicazione +
             ", valutazione=" + valutazione +
             ", commento=" + commento +
-            "}";
-               
+            ", idProdotto=" + idProdotto +
+            ", idCliente=" + idCliente +
+            "}"; 
     }
-    
     
 }

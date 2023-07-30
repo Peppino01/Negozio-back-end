@@ -114,7 +114,7 @@ public class ProdottoController {
                 prodottoInputDTO.prezzo(),
                 prodottoInputDTO.descrizione(),
                 prodottoInputDTO.vendite(),
-                prodottoInputDTO.recenzioni(),
+                prodottoInputDTO.recensioni(),
                 inventarioVuoto
             );
         }

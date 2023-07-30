@@ -18,7 +18,7 @@ public class ProdottoOutputDTOMapper implements Function<Prodotto, ProdottoOutpu
             prodotto.getPrezzo(),
             prodotto.getDescrizione(),
             prodotto.getVendite(),
-            prodotto.getRecenzioni(),
+            prodotto.getRecensioni(),
             prodotto.getInventario()
         );
     }

@@ -48,5 +48,10 @@ public class ClienteService implements IClienteService {
     public Cliente getClienteFromEmail(String email) {
         return clienteRepository.findByEmail(email);
     }
+
+    @Override
+    public Cliente getClienteFromId(Long id) {
+        return clienteRepository.findById(id).get();
+    }
     
 }

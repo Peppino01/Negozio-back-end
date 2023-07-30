@@ -18,7 +18,8 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
         "SELECT new com.grammatico.negozio.DTO.outputDTO.ProdottoInventarioOutputDTO(p.nome, i.stato, i.quantita, p.prezzo, p.descrizione) " +
         "FROM Prodotto p " +
         "JOIN p.inventario i " +
-        "WHERE i.stato = :stato"
+        "WHERE i.stato = :stato " +
+        "AND i.quantita > 0"
     )
     List<ProdottoInventarioOutputDTO> getProdottiInventarioFromStato(StatoProdotto stato);
 
@@ -49,3 +50,5 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
     int countInventarioProdotto(String nomeProdotto, StatoProdotto statoProdotto);
     
 }
+
+

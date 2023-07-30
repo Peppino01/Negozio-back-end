@@ -83,3 +83,13 @@ VALUES
     (1, 2, 2),
     (3, 3, 2),
     (7, 1, 3);
+
+
+-- popolamento dei commenti
+INSERT INTO recensioni (data_pubblicazione, valutazione, commento, id_prodotto, id_cliente)
+VALUES 
+    ('2023-07-30', 5, "Ottimo prodotto!", 1, 1),
+    ('2023-07-29', 4, "Buon rapporto qualita'-prezzo.", 2, 2),
+    ('2023-07-28', 3, "Prodotto discreto.", 1, 3),
+    ('2023-07-27', 5, "Consigliatissimo!", 3, 4),
+    ('2023-07-26', 2, "Non mi e' piaciuto.", 2, 5);

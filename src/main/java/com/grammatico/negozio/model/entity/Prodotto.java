@@ -40,9 +40,9 @@ public class Prodotto {
     @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
     private List<Vendita> vendite;
 
-    @OneToMany(targetEntity = Recenzione.class, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Recensione.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
-    private List<Recenzione> recenzioni;
+    private List<Recensione> recensioni;
 
     @OneToMany(targetEntity = Inventario.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_prodotto", referencedColumnName = "id")
@@ -71,7 +71,7 @@ public class Prodotto {
         int prezzo,
         String descrizione,
         List<Vendita> vendite,
-        List<Recenzione> recenzioni,
+        List<Recensione> recensioni,
         List<Inventario> inventario
     ) {
         super();
@@ -79,7 +79,7 @@ public class Prodotto {
         this.prezzo = prezzo;
         this.descrizione = descrizione;
         this.vendite = vendite;
-        this.recenzioni = recenzioni;
+        this.recensioni = recensioni;
         this.inventario = inventario;
     }
 
@@ -113,11 +113,11 @@ public class Prodotto {
     public void setInventario(List<Inventario> inventario) {
         this.inventario = inventario;
     }
-    public List<Recenzione> getRecenzioni() {
-        return recenzioni;
+    public List<Recensione> getRecensioni() {
+        return recensioni;
     }
-    public void setRecenzioni(List<Recenzione> recenzioni) {
-        this.recenzioni = recenzioni;
+    public void setRecensioni(List<Recensione> recensioni) {
+        this.recensioni = recensioni;
     }
     public List<Vendita> getVendite() {
         return vendite;
@@ -141,7 +141,7 @@ public class Prodotto {
             ", prezzo=" + prezzo +
             ", descrizione=" + descrizione +
             ", nome=" + vendite +
-            ", prezzo=" + recenzioni +
+            ", prezzo=" + recensioni +
             ", descrizione=" + inventario +
             ", carrello=" + carrello +
             "}";
