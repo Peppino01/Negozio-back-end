@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grammatico.negozio.Utils;
 import com.grammatico.negozio.DTO.inputDTO.ProdottoCarrelloInputDTO;
+import com.grammatico.negozio.DTO.outputDTO.ClienteInfoOutputDTO;
 import com.grammatico.negozio.DTO.outputDTO.ProdottoCarrelloOutputDTO;
 import com.grammatico.negozio.model.StatoProdotto;
 import com.grammatico.negozio.model.entity.Cliente;
@@ -139,7 +140,6 @@ public class ClienteController {
         @RequestParam String info,
         @RequestBody List<ProdottoCarrelloInputDTO> carrello
     ) {
-
         // controllo se l'email ha un formato valido
         if (!Utils.verificaFormatoEmail(email)) {
             System.out.println("Email non valida");
@@ -240,6 +240,41 @@ public class ClienteController {
         }
         
         return ResponseEntity.ok("Prodotti comprati!");
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<ClienteInfoOutputDTO> infoCliente(
+        @RequestParam String email
+    ) {
+        // controllo se l'email ha un formato valido
+        if (!Utils.verificaFormatoEmail(email)) {
+            System.out.println("Email non valida");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        // controllo se il cliente è stato trovato
+        if (!clienteService.checkExistsByEmail(email)) {
+            System.out.println("Cliente non trovato");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        // ricavo il cliente dalla email
+        Cliente cliente;
+        try {
+            cliente = clienteService.getClienteFromEmail(email);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.internalServerError().build();
+        }
+
+        // creo l'oggetto di tipo ClienteInfoOutputDTO
+        ClienteInfoOutputDTO clienteInfoOutputDTO = new ClienteInfoOutputDTO(
+            cliente.getNome(),
+            cliente.getCognome(),
+            cliente.getCarrello().size()
+        );
+
+        return ResponseEntity.ok(clienteInfoOutputDTO);
     }
     
 }
