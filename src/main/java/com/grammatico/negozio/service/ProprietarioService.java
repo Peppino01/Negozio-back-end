@@ -26,5 +26,17 @@ public class ProprietarioService implements IProprietarioService {
         // Confronta la password fornita con quella salvata nel proprietario
         return proprietario.getPassword().equals(password);
     }
+
+    @Override
+    public boolean checkExistsByEmail(String email) {
+        Proprietario proprietario = proprietarioRepository.findByEmail(email);
+
+        return proprietario != null;
+    }
+
+    @Override
+    public Proprietario getProprietarioFromEmail(String email) {
+        return proprietarioRepository.findByEmail(email);
+    }
     
 }

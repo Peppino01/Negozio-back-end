@@ -27,31 +27,36 @@ VALUES
     (2, "Pantaloni", 40, "Pantaloni lunghi realizzati con materiali di alta qualità. Ideali per un look casual o formale, a seconda dell'occasione."),
     (3, "Scarpe", 60, "Scarpe sportive di ultima generazione con suola ammortizzante e traspirante. Disponibili in diverse misure per un comfort ottimale durante l'attività fisica."),
     (4, "Camicia", 30, "Una camicia elegante e raffinata, perfetta per le occasioni speciali. Realizzata con tessuti pregiati per garantire un look impeccabile."),
-    (5, "Jeans", 50, "Jeans casual dal taglio moderno e comodo. Un capo indispensabile per un look casual-chic adatto a diverse situazioni.");
+    (5, "Jeans", 50, "Jeans casual dal taglio moderno e comodo. Un capo indispensabile per un look casual-chic adatto a diverse situazioni."),
+    (6, "Felpa con cappuccio", 35, "Una felpa con cappuccio in morbido cotone, perfetta per le giornate più fresche. Disponibile in vari colori e taglie, ideale per un look casual e confortevole.");
 
 -- popolamento dell'inventario
 INSERT INTO inventario (id_prodotto, stato, quantita)
 VALUES
     (1, "DISPONIBILE", 10),
     (1, "NON_DISPONIBILE", 2),
-    (1, "IN_PROMOZIONE", 3),
+    (1, "IN_PROMOZIONE", 0),
     (1, "VENDUTO", 24),
     (2, "DISPONIBILE", 5),
     (2, "NON_DISPONIBILE", 16),
-    (2, "IN_PROMOZIONE", 7),
+    (2, "IN_PROMOZIONE", 0),
     (2, "VENDUTO", 8),
     (3, "DISPONIBILE", 50),
     (3, "NON_DISPONIBILE", 22),
-    (3, "IN_PROMOZIONE", 47),
+    (3, "IN_PROMOZIONE", 0),
     (3, "VENDUTO", 17),
     (4, "DISPONIBILE", 31),
     (4, "NON_DISPONIBILE", 20),
-    (4, "IN_PROMOZIONE", 7),
+    (4, "IN_PROMOZIONE", 0),
     (4, "VENDUTO", 72),
     (5, "DISPONIBILE", 31),
     (5, "NON_DISPONIBILE", 2),
-    (5, "IN_PROMOZIONE", 67),
-    (5, "VENDUTO", 7);
+    (5, "IN_PROMOZIONE", 0),
+    (5, "VENDUTO", 7),
+    (6, "DISPONIBILE", 0),
+    (6, "NON_DISPONIBILE", 2),
+    (6, "IN_PROMOZIONE", 14),
+    (6, "VENDUTO", 3);
 
 
 -- popolamento delle transazioni
