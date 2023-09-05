@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grammatico.negozio.DTO.inputDTO.ClienteInputDTO;
 import com.grammatico.negozio.DTO.inputDTO.LoginInputDTO;
 import com.grammatico.negozio.DTO.inputDTO.mapper.ClienteInputDTOMapper;
-import com.grammatico.negozio.DTO.inputDTO.mapper.LoginInputDTOMapper;
 import com.grammatico.negozio.DTO.outputDTO.LoginOutputDTO;
 import com.grammatico.negozio.DTO.outputDTO.mapper.LoginOutputDTOMapper;
 import com.grammatico.negozio.model.Ruolo;
-import com.grammatico.negozio.model.Validation.LoginValidation;
 import com.grammatico.negozio.model.Validation.Validation;
 import com.grammatico.negozio.model.Validation.ValidationFactory;
 import com.grammatico.negozio.model.entity.Cliente;
@@ -24,7 +22,6 @@ import com.grammatico.negozio.service.interfaces.IProprietarioService;
 @RestController
 public class AuthController {
 
-    private final LoginInputDTOMapper loginInputDTOMapper;
     private final LoginOutputDTOMapper loginOutputDTOMapper;
     private final ClienteInputDTOMapper clienteInputDTOMapper;
     private final IClienteService clienteService;
@@ -32,14 +29,12 @@ public class AuthController {
     private final IProprietarioService proprietarioService;
 
     public AuthController(
-        LoginInputDTOMapper loginInputDTOMapper,
         LoginOutputDTOMapper loginOutputDTOMapper,
         ClienteInputDTOMapper clienteInputDTOMapper,
         IClienteService clienteService,
         IDipendenteService dipendenteService,
         IProprietarioService proprietarioService
     ) {
-        this.loginInputDTOMapper = loginInputDTOMapper;
         this.loginOutputDTOMapper = loginOutputDTOMapper;
         this.clienteInputDTOMapper = clienteInputDTOMapper;
         this.clienteService = clienteService;
