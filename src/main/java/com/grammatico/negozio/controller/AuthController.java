@@ -12,8 +12,10 @@ import com.grammatico.negozio.DTO.inputDTO.mapper.ClienteInputDTOMapper;
 import com.grammatico.negozio.DTO.inputDTO.mapper.LoginInputDTOMapper;
 import com.grammatico.negozio.DTO.outputDTO.LoginOutputDTO;
 import com.grammatico.negozio.DTO.outputDTO.mapper.LoginOutputDTOMapper;
-import com.grammatico.negozio.model.Login;
 import com.grammatico.negozio.model.Ruolo;
+import com.grammatico.negozio.model.Validation.LoginValidation;
+import com.grammatico.negozio.model.Validation.Validation;
+import com.grammatico.negozio.model.Validation.ValidationFactory;
 import com.grammatico.negozio.model.entity.Cliente;
 import com.grammatico.negozio.service.interfaces.IClienteService;
 import com.grammatico.negozio.service.interfaces.IDipendenteService;
@@ -47,23 +49,24 @@ public class AuthController {
     
     @PostMapping("/login")
     public ResponseEntity<LoginOutputDTO> login(@RequestBody LoginInputDTO loginInputDTO) {
-        // mappo loginInputDTO in un oggetto di tipo Login
-        Login login = loginInputDTOMapper.apply(loginInputDTO);
+        // Utilizzo il design pattern Factory method per controllare la validità di LoginInputDTO
+        ValidationFactory factory = new ValidationFactory();
+        Validation loginValidation = factory.createLoginValidation(loginInputDTO.email(), loginInputDTO.password());
 
         // controllo se le credenziali sono valide
-        if (!login.isValid()) {
+        if (!loginValidation.isValid()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
         // cerco l'utente proprietari, dipendenti e clienti
         try {
-            if (clienteService.checkCredentials(login.getEmail(), login.getPassword())) {
+            if (clienteService.checkCredentials(loginValidation.getEmail(), loginValidation.getPassword())) {
                 return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.CLIENTE));
             }
-            else if (dipendenteService.checkCredentials(login.getEmail(), login.getPassword())) {
+            else if (dipendenteService.checkCredentials(loginValidation.getEmail(), loginValidation.getPassword())) {
                 return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.DIPENDENTE));
             }
-            else if (proprietarioService.checkCredentials(login.getEmail(), login.getPassword())) {
+            else if (proprietarioService.checkCredentials(loginValidation.getEmail(), loginValidation.getPassword())) {
                 return ResponseEntity.ok(loginOutputDTOMapper.apply(Ruolo.PROPRIETARIO));
             }
             else {
@@ -77,6 +80,22 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<String> signin(@RequestBody ClienteInputDTO clienteInputDTO) {
+        // Utilizzo il design pattern Factory method per controllare la validità di LoginInputDTO
+        ValidationFactory factory = new ValidationFactory();
+        Validation loginValidation = factory.createSigninValidation(
+            clienteInputDTO.nome(),
+            clienteInputDTO.cognome(),
+            clienteInputDTO.email(),
+            clienteInputDTO.password(),
+            clienteInputDTO.numTelefono(),
+            clienteInputDTO.dataNascita(),
+            clienteInputDTO.genere()
+        );
+
+        // controllo se i campi inseriti dall'utente sono validi
+        if (!loginValidation.isValid()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         Cliente cliente = clienteInputDTOMapper.apply(clienteInputDTO);
 
         if (!cliente.isValid()) {

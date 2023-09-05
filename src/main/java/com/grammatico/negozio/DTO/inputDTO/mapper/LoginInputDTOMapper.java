@@ -5,14 +5,14 @@ import java.util.function.Function;
 import org.springframework.stereotype.Service;
 
 import com.grammatico.negozio.DTO.inputDTO.LoginInputDTO;
-import com.grammatico.negozio.model.Login;
+import com.grammatico.negozio.model.Validation.LoginValidation;
 
 @Service
-public class LoginInputDTOMapper implements Function<LoginInputDTO, Login> {
+public class LoginInputDTOMapper implements Function<LoginInputDTO, LoginValidation> {
 
     @Override
-    public Login apply(LoginInputDTO loginDTO) {
-        return new Login(
+    public LoginValidation apply(LoginInputDTO loginDTO) {
+        return new LoginValidation(
             loginDTO.email(),
             loginDTO.password()
         );

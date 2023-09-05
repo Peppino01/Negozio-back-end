@@ -30,7 +30,7 @@ public class ProprietarioController {
     ) {
         // controllo se l'email ha un formato valido
         if (!Utils.verificaFormatoEmail(email)) {
-            System.out.println("Email non valida");
+            System.out.println("Email non valida (getInfo)");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 

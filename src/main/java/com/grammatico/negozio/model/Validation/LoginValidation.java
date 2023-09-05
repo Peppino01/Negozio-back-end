@@ -1,11 +1,13 @@
-package com.grammatico.negozio.model;
+package com.grammatico.negozio.model.Validation;
 
-public class Login {
+import com.grammatico.negozio.Utils;
+
+public class LoginValidation implements Validation {
 
     String email;
     String password;
 
-    public Login(String email, String password) {
+    public LoginValidation(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -24,13 +26,13 @@ public class Login {
     }
 
 
+    @Override
     public boolean isValid() {
-        return isEmailValid(email) && isPasswordValid(password);
+        return isEmailValid(this.email) && isPasswordValid(this.password);
     }
 
     private boolean isEmailValid(String email) {
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        return email.matches(emailRegex);
+        return Utils.verificaFormatoEmail(email);
     }
 
     private boolean isPasswordValid(String password) {
