@@ -24,6 +24,7 @@ public class DipendenteController {
     DipendenteService dipendenteService;
     DipendenteInputDTOMapper dipendenteInputDTOMapper;
 
+    // Costruttore che inizializza le dipendenze del controller
     public DipendenteController(
         DipendenteService dipendenteService,
         DipendenteInputDTOMapper dipendenteInputDTOMapper
@@ -32,6 +33,7 @@ public class DipendenteController {
         this.dipendenteInputDTOMapper = dipendenteInputDTOMapper;
     }
 
+    // Crea un nuovo dipendente
     @PostMapping("/create")
     public ResponseEntity<String> createDipendente(@RequestBody DipendenteInputDTO dipendenteInputDTO) {
         // mappo dipendenteInputDTO in un oggetto di tipo Dipendente
@@ -59,6 +61,7 @@ public class DipendenteController {
         return ResponseEntity.ok().build();
     }
 
+    // Restituisce la lista di tutti i dipendenti
     @GetMapping("/getAll")
     public ResponseEntity<List<DipendenteOutputDTO>> getAllDipendenti() {
         List<DipendenteOutputDTO> dipendnti = new ArrayList<>();

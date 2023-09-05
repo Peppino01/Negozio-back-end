@@ -14,6 +14,7 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Long> {
 
     Prodotto findByNome(String nome);
 
+    // seleziona dati specifici da due tabelle, "Prodotto" e "Inventario", unendo le informazioni desiderate e filtrando i risultati, per generare un nuovo oggetto di output DTO (Data Transfer Object) "ProdottoInventarioOutputDTO"
     @Query(
         "SELECT new com.grammatico.negozio.DTO.outputDTO.ProdottoInventarioOutputDTO(p.nome, i.stato, i.quantita, p.prezzo, p.descrizione) " +
         "FROM Prodotto p " +

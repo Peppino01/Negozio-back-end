@@ -9,6 +9,7 @@ import com.grammatico.negozio.model.entity.ProdottoCarrello;
 import com.grammatico.negozio.repository.CarrelloRepository;
 import com.grammatico.negozio.service.interfaces.ICarrelloService;
 
+// Questa classe fornisce un servizio per gestire il carrello degli acquisti di un cliente, consentendo di ottenere, aggiungere, verificare e svuotare il carrello
 @Service
 public class CarrelloService implements ICarrelloService {
 

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// Configurazione di alcuni parametri delle richieste e risposte http
 @Configuration
 public class WebConfig {
     @Bean

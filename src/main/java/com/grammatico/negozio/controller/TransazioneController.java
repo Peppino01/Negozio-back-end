@@ -27,6 +27,7 @@ public class TransazioneController {
     TransazioneInputDTOMapper transazioneInputDTOMapper;
     TransazioneOutputDTOMapper transazioneOutputDTOMapper;
 
+    // Costruttore che inizializza le dipendenze del controller
     public TransazioneController(
         ITransazioneService transazioneService,
         TransazioneInputDTOMapper transazioneInputDTOMapper,
@@ -37,6 +38,7 @@ public class TransazioneController {
         this.transazioneOutputDTOMapper = transazioneOutputDTOMapper;
     }
 
+    // Delle informazioni non specifiche di tutte le transazioni
     @GetMapping("summary")
     public ResponseEntity<List<TransazioneSummaryOutputDTO>> getSummary() {
         List<TransazioneSummaryOutputDTO> summary = new ArrayList<>();
@@ -49,6 +51,7 @@ public class TransazioneController {
         return ResponseEntity.ok().body(summary);
     }
 
+    // Tutte le informazioni riguardanti una transazione particolare
     @GetMapping("info")
     public ResponseEntity<TransazioneDetailOutputDTO> getTransazioneDetail(
         @RequestParam() Long id
@@ -62,6 +65,7 @@ public class TransazioneController {
         }
     }
 
+    // Inserimento di una nuova transazione
     @PostMapping("insert")
     public ResponseEntity<String> insertTransazione(
         @RequestBody TransazioneInputDTO transazioneInput

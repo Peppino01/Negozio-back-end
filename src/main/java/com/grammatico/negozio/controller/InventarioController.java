@@ -21,6 +21,7 @@ public class InventarioController {
     InventarioService inventarioService;
     InventarioInputDTOMapper inventarioInputDTOMapper;
 
+    // Costruttore che inizializza le dipendenze del controller
     public InventarioController(
         InventarioService inventarioService,
         InventarioInputDTOMapper inventarioInputDTOMapper
@@ -29,6 +30,7 @@ public class InventarioController {
         this.inventarioInputDTOMapper = inventarioInputDTOMapper;
     }
 
+    // Aggiorna i prodotti di un'inventario
     @PutMapping("/update")
     public ResponseEntity<String> updateInventarioProdotto(
         @RequestBody() List<InventarioInputDTO> inventarioInputDTO

@@ -29,6 +29,7 @@ public class RecensioneController {
     ProdottoService prodottoService;
     ClienteService clienteService;
 
+    // Costruttore che inizializza le dipendenze del controller
     public RecensioneController(
     RecensioneService recensioneService,
     ProdottoService prodottoService,
@@ -39,6 +40,7 @@ public class RecensioneController {
         this.clienteService = clienteService;
     }
 
+    // Ritorna tutte le recensioni di uno specifico prodotto
     @GetMapping("getAllFromNomeProdotto")
     public ResponseEntity<List<RecensioneOutputDTO>> getAllFromNomeProdotto(
         @RequestParam() String nomeProdotto
@@ -96,6 +98,7 @@ public class RecensioneController {
         return ResponseEntity.ok(recensioniOutput);
     }
 
+    // Inserisce una nuova recensione
     @PostMapping("insert")
     public ResponseEntity<String> insertRecensione(
         @RequestBody RecensioneInputDTO recensioneInput

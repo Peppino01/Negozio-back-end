@@ -18,12 +18,14 @@ public class ProprietarioController {
 
     ProprietarioService proprietarioService;
 
+    // Costruttore che inizializza le dipendenze del controller
     public ProprietarioController(
         ProprietarioService proprietarioService
     ) {
         this.proprietarioService = proprietarioService;
     }
 
+    // Restituisce delle informazioni generiche riguardanti il proprietario
     @GetMapping("info")
     public ResponseEntity<ProprietarioInfoOutputDTO> getInfo(
         @RequestParam String email

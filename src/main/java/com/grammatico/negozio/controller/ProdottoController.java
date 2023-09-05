@@ -34,6 +34,7 @@ public class ProdottoController {
     TransazioneService transazioneService;
     ProdottoInputDTOMapper prodottoInputDTOMapper;
 
+    // Costruttore che inizializza le dipendenze del controller
     public ProdottoController(
         ProdottoService prodottoService,
         ClienteService clienteService,
@@ -48,9 +49,9 @@ public class ProdottoController {
         this.prodottoInputDTOMapper = prodottoInputDTOMapper;
     }
 
-
+    // Restituisce la lista di tutti i prodotti gestiti dal negozio
     @GetMapping("/getAll")
-    public ResponseEntity<List<ProdottoOutputDTO>> getAllDipendenti() {
+    public ResponseEntity<List<ProdottoOutputDTO>> getAllProdotti() {
         List<ProdottoOutputDTO> prodotti = new ArrayList<>();
 
         // eseguo la ricerca nel db di tutti i prodotti
@@ -63,6 +64,7 @@ public class ProdottoController {
         return ResponseEntity.ok(prodotti);
     }
 
+    // Ricerca i prodotti che abbiano uno specifico stato
     @GetMapping("/inventario")
     public ResponseEntity<List<ProdottoInventarioOutputDTO>> getProdottiInventario(
         @RequestParam(required = false) StatoProdotto stato
@@ -80,6 +82,7 @@ public class ProdottoController {
         return ResponseEntity.ok(prodottiInventario);
     }
 
+    // Inserisce un nuovo prodotto
     @PostMapping("/save")
     public ResponseEntity<String> saveProdotto(
         @RequestBody ProdottoInputDTO prodottoInputDTO

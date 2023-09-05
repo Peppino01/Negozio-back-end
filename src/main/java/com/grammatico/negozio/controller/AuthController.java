@@ -28,6 +28,7 @@ public class AuthController {
     private final IDipendenteService dipendenteService;
     private final IProprietarioService proprietarioService;
 
+    // Costruttore che inizializza le dipendenze del controller
     public AuthController(
         LoginOutputDTOMapper loginOutputDTOMapper,
         ClienteInputDTOMapper clienteInputDTOMapper,
@@ -42,6 +43,7 @@ public class AuthController {
         this.proprietarioService = proprietarioService;
     }
     
+    // Gestisce la richiesta di login
     @PostMapping("/login")
     public ResponseEntity<LoginOutputDTO> login(@RequestBody LoginInputDTO loginInputDTO) {
         // Utilizzo il design pattern Factory method per controllare la validità di LoginInputDTO
@@ -73,6 +75,7 @@ public class AuthController {
         }
     }
 
+    // Gestisce la richiesta di registrazione (sign-in) di un cliente già registrato
     @PostMapping("/signin")
     public ResponseEntity<String> signin(@RequestBody ClienteInputDTO clienteInputDTO) {
         // Utilizzo il design pattern Factory method per controllare la validità di LoginInputDTO

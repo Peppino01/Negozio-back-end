@@ -40,6 +40,7 @@ public class ClienteController {
     InventarioService inventarioService;
     TransazioneService transazioneService;
 
+    // Costruttore che inizializza le dipendenze del controller
     public ClienteController(
         ClienteService clienteService,
         CarrelloService carrelloService,
@@ -54,6 +55,7 @@ public class ClienteController {
         this.transazioneService = transazioneService;
     }
 
+    // Richiesta da parte di un cliente per ricevere la lista di tutti i prodotti presenti nel suo carrello
     @GetMapping("getCarrello")
     public ResponseEntity<List<ProdottoCarrelloOutputDTO>> getCarrello(@RequestParam String email) {
 
@@ -84,6 +86,7 @@ public class ClienteController {
         }
     }
 
+    // Aggiunge un prodotto al carrello con una determinata quantità
     @PostMapping("aggiungiAlCarrello")
     public ResponseEntity<String> aggiungiAlCarrello(
         @RequestParam String email,
@@ -134,6 +137,7 @@ public class ClienteController {
         return null;
     }
 
+    // effettua la procedura di acquisto per tutti i prodotti presenti nel carrello di un cliente
     @PatchMapping("/compra")
     public ResponseEntity<String> compraProdotti(
         @RequestParam String email,
@@ -242,6 +246,7 @@ public class ClienteController {
         return ResponseEntity.ok("Prodotti comprati!");
     }
 
+    // Restituisce delle informazioni generali sullutente
     @GetMapping("/info")
     public ResponseEntity<ClienteInfoOutputDTO> infoCliente(
         @RequestParam String email
